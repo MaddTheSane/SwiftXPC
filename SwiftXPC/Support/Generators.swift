@@ -26,8 +26,33 @@ public struct XPCArrayGenerator: GeneratorType {
 	}
 }
 
+public struct XPCDictionaryGenerator: GeneratorType {
+	private let theArray: XPCDictionary
+	//private let dictKeys: [String]
+	private var status: Int
+	public init(array: XPCDictionary) {
+		status = 0
+		theArray = array
+	}
+	
+	mutating public func next() -> XPCObject? {
+		if status >= theArray.count {
+			return nil
+		} else {
+			//return theArray[status++]
+			return nil;
+		}
+	}
+}
+
 extension XPCArray: SequenceType {
 	public func generate() -> XPCArrayGenerator {
 		return XPCArrayGenerator(array: self)
+	}
+}
+
+extension XPCDictionary: SequenceType {
+	public func generate() -> XPCDictionaryGenerator {
+		return XPCDictionaryGenerator(array: self)
 	}
 }
