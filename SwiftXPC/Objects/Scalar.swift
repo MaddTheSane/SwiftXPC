@@ -37,13 +37,19 @@ public final class XPCBool : XPCObject, BooleanLiteralConvertible, BooleanType {
     }
 }
 
-public final class XPCInt : XPCObject {
+public final class XPCInt : XPCObject, IntegerLiteralConvertible {
+    public typealias IntegerLiteralType = Int64
+    
     public convenience init(value: Int) {
         self.init(nativePointer: xpc_int64_create(Int64(value)))
     }
     
-    public convenience init(value: Int64) {
+    required public convenience init(value: Int64) {
         self.init(nativePointer: xpc_int64_create(value))
+    }
+    
+    public class func convertFromIntegerLiteral(value: IntegerLiteralType) -> Self {
+        return self(value: value)
     }
     
     public var value: Int {
@@ -53,13 +59,19 @@ public final class XPCInt : XPCObject {
     }
 }
 
-public final class XPCUInt : XPCObject {
+public final class XPCUInt : XPCObject, IntegerLiteralConvertible {
+    public typealias IntegerLiteralType = UInt64
+    
     public convenience init(value: UInt) {
         self.init(nativePointer: xpc_uint64_create(UInt64(value)))
     }
     
-    public convenience init(value: UInt64) {
+    required public convenience init(value: UInt64) {
         self.init(nativePointer: xpc_uint64_create(value))
+    }
+    
+    public class func convertFromIntegerLiteral(value: IntegerLiteralType) -> Self {
+        return self(value: value)
     }
     
     public var value: UInt {
@@ -69,9 +81,15 @@ public final class XPCUInt : XPCObject {
     }
 }
 
-public final class XPCDouble : XPCObject {
-    public convenience init(value: Double) {
+public final class XPCDouble : XPCObject, IntegerLiteralConvertible {
+    public typealias IntegerLiteralType = Double
+    
+    required public convenience init(value: Double) {
         self.init(nativePointer: xpc_double_create(value))
+    }
+    
+    public class func convertFromIntegerLiteral(value: IntegerLiteralType) -> Self {
+        return self(value: value)
     }
     
     public var value: Double {
