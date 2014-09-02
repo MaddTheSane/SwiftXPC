@@ -9,6 +9,67 @@
 import Foundation
 import XPC
 
+public func <=(lhs: XPCInt, rhs: XPCInt) -> Bool {
+    return lhs.value <= rhs.value
+}
+
+public func >=(lhs: XPCInt, rhs: XPCInt) -> Bool {
+    return lhs.value >= rhs.value
+}
+
+public func >(lhs: XPCInt, rhs: XPCInt) -> Bool {
+    return lhs.value > rhs.value
+}
+
+public func ==(lhs: XPCInt, rhs: XPCInt) -> Bool {
+    return (lhs as XPCObject) == (rhs as XPCObject)
+}
+
+public func <(lhs: XPCInt, rhs: XPCInt) -> Bool {
+    return lhs.value < rhs.value
+}
+
+
+public func <=(lhs: XPCUInt, rhs: XPCUInt) -> Bool{
+    return lhs.value <= rhs.value
+}
+
+public func >=(lhs: XPCUInt, rhs: XPCUInt) -> Bool {
+    return lhs.value >= rhs.value
+}
+
+public func >(lhs: XPCUInt, rhs: XPCUInt) -> Bool {
+    return lhs.value > rhs.value
+}
+
+public func ==(lhs: XPCUInt, rhs: XPCUInt) -> Bool {
+    return (lhs as XPCObject) == (rhs as XPCObject)
+}
+
+public func <(lhs: XPCUInt, rhs: XPCUInt) -> Bool {
+    return lhs.value < rhs.value
+}
+
+public func <=(lhs: XPCDouble, rhs: XPCDouble) -> Bool{
+    return lhs.value <= rhs.value
+}
+
+public func >=(lhs: XPCDouble, rhs: XPCDouble) -> Bool {
+    return lhs.value >= rhs.value
+}
+
+public func >(lhs: XPCDouble, rhs: XPCDouble) -> Bool {
+    return lhs.value > rhs.value
+}
+
+public func ==(lhs: XPCDouble, rhs: XPCDouble) -> Bool {
+    return (lhs as XPCObject) == (rhs as XPCObject)
+}
+
+public func <(lhs: XPCDouble, rhs: XPCDouble) -> Bool {
+    return lhs.value < rhs.value
+}
+
 public final class XPCNull : XPCObject {
     public convenience init() {
         self.init(nativePointer: xpc_null_create())
@@ -37,7 +98,7 @@ public final class XPCBool : XPCObject, BooleanLiteralConvertible, BooleanType {
     }
 }
 
-public final class XPCInt : XPCObject, IntegerLiteralConvertible {
+public final class XPCInt : XPCObject, IntegerLiteralConvertible, Comparable {
     public typealias IntegerLiteralType = Int64
     
     public convenience init(value: Int) {
@@ -59,7 +120,7 @@ public final class XPCInt : XPCObject, IntegerLiteralConvertible {
     }
 }
 
-public final class XPCUInt : XPCObject, IntegerLiteralConvertible {
+public final class XPCUInt : XPCObject, IntegerLiteralConvertible, Comparable {
     public typealias IntegerLiteralType = UInt64
     
     public convenience init(value: UInt) {
@@ -81,7 +142,7 @@ public final class XPCUInt : XPCObject, IntegerLiteralConvertible {
     }
 }
 
-public final class XPCDouble : XPCObject, FloatLiteralConvertible {
+public final class XPCDouble : XPCObject, FloatLiteralConvertible, Comparable {
     public typealias FloatLiteralType = Double
     
     required public convenience init(value: Double) {
