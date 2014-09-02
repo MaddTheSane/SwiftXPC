@@ -81,14 +81,14 @@ public final class XPCUInt : XPCObject, IntegerLiteralConvertible {
     }
 }
 
-public final class XPCDouble : XPCObject, IntegerLiteralConvertible {
-    public typealias IntegerLiteralType = Double
+public final class XPCDouble : XPCObject, FloatLiteralConvertible {
+    public typealias FloatLiteralType = Double
     
     required public convenience init(value: Double) {
         self.init(nativePointer: xpc_double_create(value))
     }
     
-    public class func convertFromIntegerLiteral(value: IntegerLiteralType) -> Self {
+    public class func convertFromFloatLiteral(value: FloatLiteralType) -> Self {
         return self(value: value)
     }
     
