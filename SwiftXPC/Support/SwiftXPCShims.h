@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <xpc/xpc.h>
 
 // SwiftXPCShims is required due to the ObjC-Swift bridge not exposing certain XPC APIs correctly.
 

@@ -14,6 +14,13 @@ public final class XPCDictionary : XPCObject {
         self.init(nativePointer: xpc_dictionary_create(nil, nil, 0))
     }
     
+    public convenience init(dictionary: [String: XPCObject]) {
+        self.init()
+        for (key, value) in dictionary {
+            self[key] = value
+        }
+    }
+    
     public subscript(key: String) -> XPCObject {
         get {
             let byteCount = key.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)
