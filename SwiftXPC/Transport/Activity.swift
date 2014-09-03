@@ -54,7 +54,6 @@ public enum XPCActivityState: Int {
 
 public typealias XPCActivityHandler = (XPCActivity!) -> Void
 
-
 public class XPCActivity: XPCObject {
     
     public class func register(identifier: String, criteria: XPCDictionary, handler outerHandle: XPCActivityHandler) {
@@ -69,33 +68,35 @@ public class XPCActivity: XPCObject {
     }
     
     public var state: XPCActivityState {
-        get {
-            let out = xpc_activity_get_state(objectPointer)
-            return XPCActivityStateShim[out]!
-        }
-        set {
-            var toXPC: xpc_activity_state_t = 0
-            for (i, o) in XPCActivityStateShim {
-                if o == newValue {
-                    toXPC = i
-                    break
-                }
+    get {
+        let out = xpc_activity_get_state(objectPointer)
+        return XPCActivityStateShim[out]!
+    }
+    set {
+        var toXPC: xpc_activity_state_t = 0
+        for (i, o) in XPCActivityStateShim {
+            if o == newValue {
+                toXPC = i
+                break
             }
-            
-            xpc_activity_set_state(objectPointer, toXPC)
         }
+        
+        xpc_activity_set_state(objectPointer, toXPC)
+    }
     }
     
     public var criteria: XPCDictionary {
-        get {
-            return XPCDictionary(nativePointer: xpc_activity_copy_criteria(objectPointer))
-        }
-        set {
-            xpc_activity_set_criteria(objectPointer, newValue.objectPointer)
-        }
+    get {
+        return XPCDictionary(nativePointer: xpc_activity_copy_criteria(objectPointer))
+    }
+    set {
+        xpc_activity_set_criteria(objectPointer, newValue.objectPointer)
+    }
     }
     
-    public var shouldDefer: Bool { get {
-        return xpc_activity_should_defer(objectPointer)
-        }}
+    public var shouldDefer: Bool {
+    get {
+    return xpc_activity_should_defer(objectPointer)
+    }
+    }
 }
