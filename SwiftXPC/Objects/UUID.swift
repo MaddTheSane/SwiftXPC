@@ -12,7 +12,7 @@ import XPC
 private let UUIDLength: UInt = (128 / 8)
 
 public final class XPCUUID : XPCObject {
-    public convenience init(UUID: NSUUID) {
+    required public convenience init(UUID: NSUUID) {
         self.init(nativePointer: XPCShimCreateObjectFromUUID(UUID))
     }
     

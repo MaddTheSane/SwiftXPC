@@ -10,13 +10,9 @@ import Foundation
 import XPC
 
 public final class XPCString : XPCObject, StringLiteralConvertible {
-    public convenience init(string contents: String) {
-        self.init(string: contents, encoding: NSUTF8StringEncoding)
-    }
-    
-    public convenience init(string contents: String, encoding: NSStringEncoding) {
+    required public convenience init(string contents: String, encoding: NSStringEncoding = NSUTF8StringEncoding) {
         let byteCount = contents.lengthOfBytesUsingEncoding(encoding)
-        var buffer : Array<CChar> = []
+        var buffer = Array<CChar>()
         
         buffer.fill(CChar(0), desiredLength: byteCount)
         contents.getCString(&buffer, maxLength: byteCount, encoding: encoding)

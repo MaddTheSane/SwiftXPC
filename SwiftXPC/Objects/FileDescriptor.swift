@@ -10,7 +10,7 @@ import Foundation
 import XPC
 
 public final class XPCFileDescriptor : XPCObject {
-    public convenience init(fileHandle: NSFileHandle) {
+    required public convenience init(fileHandle: NSFileHandle) {
         self.init(nativePointer: xpc_fd_create(fileHandle.fileDescriptor))
     }
     

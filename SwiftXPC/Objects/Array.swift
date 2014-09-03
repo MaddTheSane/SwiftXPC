@@ -10,11 +10,11 @@ import Foundation
 import XPC
 
 public final class XPCArray : XPCObject {
-    public convenience init() {
+    required public convenience init() {
         self.init(nativePointer: xpc_array_create(nil, 0))
     }
     
-    public convenience init(objects: [XPCObject]) {
+    required public convenience init(objects: [XPCObject]) {
         self.init()
         
         for obj in objects {

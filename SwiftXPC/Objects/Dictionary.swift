@@ -17,7 +17,7 @@ public final class XPCDictionary : XPCObject {
     public subscript(key: String) -> XPCObject {
         get {
             let byteCount = key.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)
-            var buffer : [CChar] = []
+            var buffer = [CChar]()
             buffer.fill(CChar(0), desiredLength: byteCount)
             key.getCString(&buffer, maxLength: byteCount, encoding: NSUTF8StringEncoding)
             
@@ -26,7 +26,7 @@ public final class XPCDictionary : XPCObject {
         
         set {
             let byteCount = key.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)
-            var buffer : [CChar] = []
+            var buffer = [CChar]()
             buffer.fill(CChar(0), desiredLength: byteCount)
             key.getCString(&buffer, maxLength: byteCount, encoding: NSUTF8StringEncoding)
             

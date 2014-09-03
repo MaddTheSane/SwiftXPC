@@ -12,7 +12,7 @@ import XPC
 private let nanosecondConversion : Int64 = 1_000_000_000
 
 public final class XPCDate : XPCObject {
-    public convenience init(value: NSDate) {
+    required public convenience init(value: NSDate) {
         let seconds = Int64(value.timeIntervalSince1970)
         self.init(nativePointer: xpc_date_create(seconds * nanosecondConversion))
     }
