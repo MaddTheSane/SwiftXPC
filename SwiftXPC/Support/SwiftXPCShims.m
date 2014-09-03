@@ -99,6 +99,13 @@ NSUUID *XPCShimGetUUIDFromObject(xpc_object_t object) {
     return [[NSUUID alloc] initWithUUIDBytes:bytes];
 }
 
+NSUUID *XPCShimGetUUIDFromCFUUID(CFUUIDRef uuidRef) {
+    CFUUIDBytes bytes = CFUUIDGetUUIDBytes(uuidRef);
+    uuid_t uuidBytes = {0};
+    memcpy(&uuidBytes, &bytes, sizeof(uuid_t));
+    return [[NSUUID alloc] initWithUUIDBytes:uuidBytes];
+}
+
 unsigned char * XPCShimMapSharedMemoryRegion(xpc_object_t region, size_t *size) {
     unsigned char *ptr;
     size_t retval = xpc_shmem_map(region, (void **) &ptr);

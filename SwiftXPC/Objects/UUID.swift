@@ -16,6 +16,10 @@ public final class XPCUUID : XPCObject {
         self.init(nativePointer: XPCShimCreateObjectFromUUID(UUID))
     }
     
+    required public convenience init(UUID: CFUUID) {
+        self.init(UUID: XPCShimGetUUIDFromCFUUID(UUID))
+    }
+    
     public convenience init(UUIDString: String) {
         self.init(UUID: NSUUID(UUIDString: UUIDString))
     }

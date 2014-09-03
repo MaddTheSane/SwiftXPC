@@ -41,6 +41,7 @@ extern xpc_object_t XPCShimGetTerminationImminentError(void);
 
 extern xpc_object_t XPCShimCreateObjectFromUUID(NSUUID *uuid);
 extern NSUUID *XPCShimGetUUIDFromObject(xpc_object_t object);
+extern NSUUID *XPCShimGetUUIDFromCFUUID(CFUUIDRef uuidRef);
 
 #pragma mark xpc_shmem
 
