@@ -19,6 +19,10 @@ public final class XPCString : XPCObject, StringLiteralConvertible {
         self.init(nativePointer: xpc_string_create(buffer))
     }
     
+    internal convenience init(cString: UnsafePointer<CChar>) {
+        self.init(nativePointer: xpc_string_create(cString));
+    }
+    
     public var length: Int {
     get {
         return Int(xpc_string_get_length(objectPointer))
