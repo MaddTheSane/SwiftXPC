@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <xpc/xpc.h>
 
+// TODO: These shims don't need to be public.
+// FIXME: unfortunately there isn't a way to get them to work without this header being public.
 // SwiftXPCShims is required due to the ObjC-Swift bridge not exposing certain XPC APIs correctly.
 
 #pragma mark Type Shims

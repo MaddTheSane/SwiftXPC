@@ -9,6 +9,8 @@
 import Foundation
 import XPC
 
+public let XPCApiVersion = XPC_API_VERSION
+
 public class XPCObject : Hashable, Printable {
     internal var objectPointer : xpc_object_t
     
