@@ -14,6 +14,16 @@ public final class XPCFileDescriptor : XPCObject {
         self.init(nativePointer: xpc_fd_create(fileHandle.fileDescriptor))
     }
     
+    public convenience init?(fileDescriptor: Int32) {
+        if let xpcFD = xpc_fd_create(fileDescriptor) {
+            self.init(nativePointer: xpcFD)
+        } else {
+            self.init(nativePointer: xpc_null_create())
+            
+            return nil
+        }
+    }
+    
     public var fileHandle : NSFileHandle {
     get {
         return NSFileHandle(fileDescriptor: xpc_fd_dup(objectPointer), closeOnDealloc: true)

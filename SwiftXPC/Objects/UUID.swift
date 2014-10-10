@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 William Kent. All rights reserved.
 //
 
-import CoreFoundation
 import Foundation
 import XPC
 
@@ -33,6 +32,10 @@ public final class XPCUUID : XPCObject {
             
             return nil
         }
+    }
+    
+    public convenience init() {
+        self.init(UUID: NSUUID())
     }
     
     public var UUID: NSUUID {

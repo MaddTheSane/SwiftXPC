@@ -18,11 +18,11 @@ public final class XPCArray : XPCObject {
         self.init()
         
         for obj in objects {
-            appendObject(obj)
+            append(obj)
         }
     }
     
-    public func appendObject(value: XPCObject) {
+    public func append(value: XPCObject) {
         xpc_array_append_value(objectPointer, value.objectPointer)
     }
     

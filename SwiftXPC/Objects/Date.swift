@@ -17,6 +17,10 @@ public final class XPCDate : XPCObject {
         self.init(nativePointer: xpc_date_create(seconds * nanosecondConversion))
     }
     
+    public convenience init() {
+        self.init(nativePointer: xpc_date_create_from_current())
+    }
+    
     public var value : NSDate {
     get {
         var seconds = Int64(xpc_date_get_value(objectPointer))
