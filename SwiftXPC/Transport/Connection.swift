@@ -12,16 +12,16 @@ import XPC
 
 public final class XPCConnection : XPCObject {
     public class func createAnonymousConnection() -> XPCConnection {
-        return XPCConnection(nativePointer: xpc_connection_create(nil, nil))
+        return XPCConnection(anonymous: ())
     }
     
-    public convenience init(name: String) {
-        self.init(name: name, queue: nil)
-    }
-    
-    public convenience init(name: String, queue: dispatch_queue_t?) {
+    public convenience init(name: String, queue: dispatch_queue_t? = nil) {
         let namePtr = name.cStringUsingEncoding(NSUTF8StringEncoding)
         self.init(nativePointer: xpc_connection_create(namePtr!, queue))
+    }
+    
+    public convenience init(anonymous: ()) {
+        self.init(nativePointer: xpc_connection_create(nil, nil))
     }
     
     public convenience init(endpoint: XPCEndpoint) {

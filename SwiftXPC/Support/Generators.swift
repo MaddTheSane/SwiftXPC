@@ -14,7 +14,11 @@ public struct XPCArrayGenerator: GeneratorType {
     private var status: Int
     public init(array: XPCArray) {
         status = 0
-        theArray = XPCArray(nativePointer: array.copy()!.objectPointer )
+        if let copiedArray = array.copy() {
+            theArray = XPCArray(nativePointer: copiedArray.objectPointer)
+        } else {
+            theArray = array
+        }
     }
     
     mutating public func next() -> XPCObject? {

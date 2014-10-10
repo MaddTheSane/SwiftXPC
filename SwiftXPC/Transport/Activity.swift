@@ -23,7 +23,8 @@ public typealias XPCActivityHandler = (XPCActivity!) -> Void
 public class XPCActivity: XPCObject {
     
     private let XPCActivityStateShim: [xpc_activity_state_t: XPCActivityState] = [XPC_ACTIVITY_STATE_CHECK_IN: .CheckIn,
-    XPC_ACTIVITY_STATE_WAIT: .Wait, XPC_ACTIVITY_STATE_RUN: .Run, XPC_ACTIVITY_STATE_DEFER: .Defer, XPC_ACTIVITY_STATE_CONTINUE: .Continue, XPC_ACTIVITY_STATE_DONE: .Done ]
+        XPC_ACTIVITY_STATE_WAIT: .Wait, XPC_ACTIVITY_STATE_RUN: .Run, XPC_ACTIVITY_STATE_DEFER: .Defer,
+        XPC_ACTIVITY_STATE_CONTINUE: .Continue, XPC_ACTIVITY_STATE_DONE: .Done ]
    
     public class var checkIn: XPCDictionary {
     get {
@@ -45,7 +46,11 @@ public class XPCActivity: XPCObject {
     public var state: XPCActivityState {
     get {
         let out = xpc_activity_get_state(objectPointer)
-        return XPCActivityStateShim[out]!
+        if let toRet = XPCActivityStateShim[out] {
+            return toRet
+        } else {
+            return .Wait
+        }
     }
     set {
         var toXPC: xpc_activity_state_t = 0
