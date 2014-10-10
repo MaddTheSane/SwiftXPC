@@ -76,152 +76,28 @@ public class XPCActivity: XPCObject {
     }
     
     // MARK: Activity dictionary keys
-    #if true
-    public class var intervalKey: String {
-    get {
-        return String.fromCString(XPC_ACTIVITY_INTERVAL)!
-    }
-    }
+    public let intervalKey = String.fromCString(XPC_ACTIVITY_INTERVAL)!
+    public let gracePeriodKey = String.fromCString(XPC_ACTIVITY_GRACE_PERIOD)!
+    public let priorityKey = String.fromCString(XPC_ACTIVITY_PRIORITY)!
+    public let allowBatteryKey = String.fromCString(XPC_ACTIVITY_ALLOW_BATTERY)!
+    public let requiresScreenSleepKey = String.fromCString(XPC_ACTIVITY_REQUIRE_SCREEN_SLEEP)!
+    public let requiredBatteryLevelKey = String.fromCString(XPC_ACTIVITY_REQUIRE_BATTERY_LEVEL)!
+    public let requiresHardDriveSpinningKey = String.fromCString(XPC_ACTIVITY_REQUIRE_HDD_SPINNING)!
     
-    public class var gracePeriodKey: String {
-    get {
-        return String.fromCString(XPC_ACTIVITY_GRACE_PERIOD)!
-    }
-    }
+    public let activityRepeating = XPCString(cString: XPC_ACTIVITY_REPEATING)
+    public let activityDelay = XPCString(cString: XPC_ACTIVITY_DELAY)
     
-    public class var priorityKey: String {
-    get {
-        return String.fromCString(XPC_ACTIVITY_PRIORITY)!
-    }
-    }
+    public let interval1Minute = XPCInt(value: XPC_ACTIVITY_INTERVAL_1_MIN)
+    public let interval5Minutes = XPCInt(value: XPC_ACTIVITY_INTERVAL_5_MIN)
+    public let interval15Minutes = XPCInt(value: XPC_ACTIVITY_INTERVAL_15_MIN)
+    public let interval30Minutes = XPCInt(value: XPC_ACTIVITY_INTERVAL_30_MIN)
+    public let interval1Hour = XPCInt(value: XPC_ACTIVITY_INTERVAL_1_HOUR)
+    public let interval4Hours = XPCInt(value: XPC_ACTIVITY_INTERVAL_4_HOURS)
+    public let interval8Hours = XPCInt(value: XPC_ACTIVITY_INTERVAL_8_HOURS)
+    public let interval1Day = XPCInt(value: XPC_ACTIVITY_INTERVAL_1_DAY)
+    public let interval7Days = XPCInt(value: XPC_ACTIVITY_INTERVAL_7_DAYS)
     
-    public class var allowBatteryKey: String {
-    get {
-        return String.fromCString(XPC_ACTIVITY_ALLOW_BATTERY)!
-    }
-    }
-    
-    public class var requiresScreenSleepKey: String {
-    get {
-        return String.fromCString(XPC_ACTIVITY_REQUIRE_SCREEN_SLEEP)!
-    }
-    }
-    
-    public class var requiredBatteryLevelKey: String {
-    get {
-        return String.fromCString(XPC_ACTIVITY_REQUIRE_BATTERY_LEVEL)!
-    }
-    }
-    
-    public class var requiresHardDriveSpinningKey: String {
-    get {
-        return String.fromCString(XPC_ACTIVITY_REQUIRE_HDD_SPINNING)!
-    }
-    }
+    public let priorityMaintenance = XPCString(cString: XPC_ACTIVITY_PRIORITY_MAINTENANCE)
+    public let priorityUtility = XPCString(cString: XPC_ACTIVITY_PRIORITY_UTILITY)
 
-    
-    public class var activityRepeating: XPCString {
-    get {
-        return XPCString(cString: XPC_ACTIVITY_REPEATING)
-    }
-    }
-    
-    public class var activityDelay: XPCString {
-    get {
-        return XPCString(cString: XPC_ACTIVITY_DELAY)
-    }
-    }
-    
-    public class var interval1Minute: XPCInt {
-    get {
-        return XPCInt(value: XPC_ACTIVITY_INTERVAL_1_MIN)
-    }
-    }
-
-    public class var interval5Minutes: XPCInt {
-    get {
-        return XPCInt(value: XPC_ACTIVITY_INTERVAL_5_MIN)
-    }
-    }
-    
-    public class var interval15Minutes: XPCInt {
-    get {
-        return XPCInt(value: XPC_ACTIVITY_INTERVAL_15_MIN)
-    }
-    }
-    
-    public class var interval30Minutes: XPCInt {
-    get {
-        return XPCInt(value: XPC_ACTIVITY_INTERVAL_30_MIN)
-    }
-    }
-    
-    public class var interval1Hour: XPCInt {
-    get {
-        return XPCInt(value: XPC_ACTIVITY_INTERVAL_1_HOUR)
-    }
-    }
-    
-    public class var interval4Hours: XPCInt {
-    get {
-        return XPCInt(value: XPC_ACTIVITY_INTERVAL_4_HOURS)
-    }
-    }
-    
-    public class var interval8Hours: XPCInt {
-    get {
-        return XPCInt(value: XPC_ACTIVITY_INTERVAL_8_HOURS)
-    }
-    }
-    
-    public class var interval1Day: XPCInt {
-    get {
-        return XPCInt(value: XPC_ACTIVITY_INTERVAL_1_DAY)
-    }
-    }
-    
-    public class var interval7Days: XPCInt {
-    get {
-        return XPCInt(value: XPC_ACTIVITY_INTERVAL_7_DAYS)
-    }
-    }
-    
-    public class var priorityMaintenance: XPCString {
-    get {
-        return XPCString(cString: XPC_ACTIVITY_PRIORITY_MAINTENANCE)
-    }
-    }
-    
-    public class var priorityUtility: XPCString {
-    get {
-        return XPCString(cString: XPC_ACTIVITY_PRIORITY_UTILITY)
-    }
-    }
-    
-    #else
-    // MARK: Activity dictionary keys
-    public class let intervalKey = String.fromCString(XPC_ACTIVITY_INTERVAL)!
-    public class let gracePeriodKey = String.fromCString(XPC_ACTIVITY_GRACE_PERIOD)!
-    public class let priorityKey = String.fromCString(XPC_ACTIVITY_PRIORITY)!
-    public class let allowBatteryKey = String.fromCString(XPC_ACTIVITY_ALLOW_BATTERY)!
-    public class let requiresScreenSleepKey = String.fromCString(XPC_ACTIVITY_REQUIRE_SCREEN_SLEEP)!
-    public class let requiredBatteryLevelKey = String.fromCString(XPC_ACTIVITY_REQUIRE_BATTERY_LEVEL)!
-    public class let requiresHardDriveSpinningKey = String.fromCString(XPC_ACTIVITY_REQUIRE_HDD_SPINNING)!
-    
-    public class let activityRepeating = XPCString(cString: XPC_ACTIVITY_REPEATING)
-    public class let activityDelay = XPCString(cString: XPC_ACTIVITY_DELAY)
-    
-    public class let interval1Minute = XPCInt(value: XPC_ACTIVITY_INTERVAL_1_MIN)
-    public class let interval5Minutes = XPCInt(value: XPC_ACTIVITY_INTERVAL_5_MIN)
-    public class let interval15Minutes = XPCInt(value: XPC_ACTIVITY_INTERVAL_15_MIN)
-    public class let interval30Minutes = XPCInt(value: XPC_ACTIVITY_INTERVAL_30_MIN)
-    public class let interval1Hour = XPCInt(value: XPC_ACTIVITY_INTERVAL_1_HOUR)
-    public class let interval4Hours = XPCInt(value: XPC_ACTIVITY_INTERVAL_4_HOURS)
-    public class let interval8Hours = XPCInt(value: XPC_ACTIVITY_INTERVAL_8_HOURS)
-    public class let interval1Day = XPCInt(value: XPC_ACTIVITY_INTERVAL_1_DAY)
-    public class let interval7Days = XPCInt(value: XPC_ACTIVITY_INTERVAL_7_DAYS)
-    
-    public class let priorityMaintenance = XPCString(cString: XPC_ACTIVITY_PRIORITY_MAINTENANCE)
-    public class let priorityUtility = XPCString(cString: XPC_ACTIVITY_PRIORITY_UTILITY)
-    #endif
 }
