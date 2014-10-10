@@ -87,8 +87,8 @@ public final class XPCBool : XPCObject, BooleanLiteralConvertible, BooleanType {
     }
     }
     
-    public class func convertFromBooleanLiteral(value: Bool) -> Self {
-        return self(value: value)
+    public convenience init(booleanLiteral value: Bool) {
+        self.init(value: value)
     }
     
     public var boolValue: Bool {
@@ -109,8 +109,8 @@ public final class XPCInt : XPCObject, IntegerLiteralConvertible, Comparable {
         self.init(nativePointer: xpc_int64_create(value))
     }
     
-    public class func convertFromIntegerLiteral(value: IntegerLiteralType) -> Self {
-        return self(value: value)
+    public convenience init(integerLiteral value: Int64) {
+        self.init(value: value)
     }
     
     public var value: Int64 {
@@ -131,8 +131,8 @@ public final class XPCUInt : XPCObject, IntegerLiteralConvertible, Comparable {
         self.init(nativePointer: xpc_uint64_create(value))
     }
     
-    public class func convertFromIntegerLiteral(value: IntegerLiteralType) -> Self {
-        return self(value: value)
+    public convenience init(integerLiteral value: UInt64) {
+        self.init(value: value)
     }
     
     public var value: UInt64 {
@@ -149,8 +149,8 @@ public final class XPCDouble : XPCObject, FloatLiteralConvertible, Comparable {
         self.init(nativePointer: xpc_double_create(value))
     }
     
-    public class func convertFromFloatLiteral(value: FloatLiteralType) -> Self {
-        return self(value: value)
+    public convenience init(floatLiteral value: Double) {
+        self.init(value: value)
     }
     
     public var value: Double {

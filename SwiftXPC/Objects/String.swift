@@ -35,12 +35,17 @@ public final class XPCString : XPCObject, StringLiteralConvertible {
     }
     }
     
-    public class func convertFromStringLiteral(value: String) -> XPCString {
-        return XPCString(string: value)
+    public convenience init(stringLiteral value: String) {
+        self.init(string: value)
+    }
+	
+    public convenience init(unicodeScalarLiteral value: String) {
+        let outString = String(unicodeScalarLiteral: value)
+        self.init(string: outString)
     }
     
-    public class func convertFromExtendedGraphemeClusterLiteral(value: String) -> XPCString {
-        let outString = String.convertFromExtendedGraphemeClusterLiteral(value)
-        return XPCString(string: outString)
+    public convenience init(extendedGraphemeClusterLiteral value: String) {
+        let outString = String(extendedGraphemeClusterLiteral: value)
+        self.init(string: outString)
     }
 }

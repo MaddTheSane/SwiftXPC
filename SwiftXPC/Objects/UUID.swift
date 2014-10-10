@@ -20,8 +20,14 @@ public final class XPCUUID : XPCObject {
         self.init(UUID: XPCShimGetUUIDFromCFUUID(UUID))
     }
     
-    public convenience init(UUIDString: String) {
-        self.init(UUID: NSUUID(UUIDString: UUIDString))
+    public convenience init?(UUIDString: String) {
+        if let ourUUID = NSUUID(UUIDString: UUIDString) {
+            self.init(UUID: ourUUID)
+        } else {
+            self.init(UUID: NSUUID())
+            
+            return nil
+        }
     }
     
     public var UUID: NSUUID {
@@ -37,6 +43,6 @@ public final class XPCUUID : XPCObject {
     }
     
     public class func generateUUID() -> XPCUUID {
-        return XPCUUID(UUID: NSUUID.UUID())
+        return XPCUUID(UUID: NSUUID())
     }
 }

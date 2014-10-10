@@ -25,9 +25,12 @@ public class XPCData : XPCObject {
     }
     }
     
-    public func readData(offset: Int = 0) -> NSData {
-        var data = NSMutableData(length: self.length)
-        xpc_data_get_bytes(objectPointer, data.mutableBytes, UInt(offset), UInt(self.length))
-        return data
+    public func readData(offset: Int = 0) -> NSData? {
+        if let data = NSMutableData(length: self.length) {
+            xpc_data_get_bytes(objectPointer, data.mutableBytes, UInt(offset), UInt(self.length))
+            return data
+        } else {
+            return nil
+        }
     }
 }
