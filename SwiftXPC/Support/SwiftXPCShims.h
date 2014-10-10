@@ -39,12 +39,6 @@ extern xpc_object_t XPCShimGetConnectionInterruptedError(void);
 extern xpc_object_t XPCShimGetConnectionInvalidError(void);
 extern xpc_object_t XPCShimGetTerminationImminentError(void);
 
-#pragma mark xpc_uuid
-
-extern xpc_object_t XPCShimCreateObjectFromUUID(NSUUID *uuid);
-extern NSUUID *XPCShimGetUUIDFromObject(xpc_object_t object);
-extern NSUUID *XPCShimGetUUIDFromCFUUID(CFUUIDRef uuidRef);
-
 #pragma mark xpc_shmem
 
 extern unsigned char * XPCShimMapSharedMemoryRegion(xpc_object_t region, size_t *size);

@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 William Kent. All rights reserved.
 //
 
+import CoreFoundation
 import Foundation
 import XPC
 
@@ -13,11 +14,15 @@ private let UUIDLength: UInt = (128 / 8)
 
 public final class XPCUUID : XPCObject {
     required public convenience init(UUID: NSUUID) {
-        self.init(nativePointer: XPCShimCreateObjectFromUUID(UUID))
+        var aNSUUIDBytes = [UInt8](count: 16, repeatedValue: 0)
+        UUID.getUUIDBytes(&aNSUUIDBytes)
+        self.init(nativePointer: xpc_uuid_create(aNSUUIDBytes))
     }
     
-    required public convenience init(UUID: CFUUID) {
-        self.init(UUID: XPCShimGetUUIDFromCFUUID(UUID))
+    public convenience init(UUID: CFUUID) {
+        var uuidStr = CFUUIDCreateString(kCFAllocatorDefault, UUID) as NSString as String
+        var ourUUID = NSUUID(UUIDString: uuidStr)!
+        self.init(UUID: ourUUID)
     }
     
     public convenience init?(UUIDString: String) {
@@ -32,7 +37,8 @@ public final class XPCUUID : XPCObject {
     
     public var UUID: NSUUID {
     get {
-        return XPCShimGetUUIDFromObject(objectPointer)
+        let ourBytes = xpc_uuid_get_bytes(objectPointer)
+        return NSUUID(UUIDBytes: ourBytes)
     }
     }
     

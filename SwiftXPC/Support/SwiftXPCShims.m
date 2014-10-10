@@ -88,24 +88,6 @@ xpc_object_t XPCShimGetTerminationImminentError(void) {
     return XPC_ERROR_TERMINATION_IMMINENT;
 }
 
-xpc_object_t XPCShimCreateObjectFromUUID(NSUUID *uuid) {
-    uuid_t bytes;
-    [uuid getUUIDBytes:bytes];
-    return xpc_uuid_create(bytes);
-}
-
-NSUUID *XPCShimGetUUIDFromObject(xpc_object_t object) {
-    const unsigned char * bytes = xpc_uuid_get_bytes(object);
-    return [[NSUUID alloc] initWithUUIDBytes:bytes];
-}
-
-NSUUID *XPCShimGetUUIDFromCFUUID(CFUUIDRef uuidRef) {
-    CFUUIDBytes bytes = CFUUIDGetUUIDBytes(uuidRef);
-    uuid_t uuidBytes = {0};
-    memcpy(&uuidBytes, &bytes, sizeof(uuid_t));
-    return [[NSUUID alloc] initWithUUIDBytes:uuidBytes];
-}
-
 unsigned char * XPCShimMapSharedMemoryRegion(xpc_object_t region, size_t *size) {
     unsigned char *ptr;
     size_t retval = xpc_shmem_map(region, (void **) &ptr);

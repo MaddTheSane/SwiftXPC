@@ -169,9 +169,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1F46AD2E198842DA001E32C4 /* Build configuration list for PBXNativeTarget "SwiftXPC" */;
 			buildPhases = (
+				1F46AD15198842DA001E32C4 /* Headers */,
 				1F46AD13198842DA001E32C4 /* Sources */,
 				1F46AD14198842DA001E32C4 /* Frameworks */,
-				1F46AD15198842DA001E32C4 /* Headers */,
 				1F46AD16198842DA001E32C4 /* Resources */,
 			);
 			buildRules = (
@@ -365,6 +365,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				STRIP_STYLE = "non-global";
 			};
 			name = Release;
 		};
