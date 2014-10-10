@@ -14,7 +14,7 @@ public struct XPCArrayGenerator: GeneratorType {
     private var status: Int
     public init(array: XPCArray) {
         status = 0
-        theArray = array
+        theArray = XPCArray(nativePointer: array.copy()!.objectPointer )
     }
     
     mutating public func next() -> XPCObject? {
