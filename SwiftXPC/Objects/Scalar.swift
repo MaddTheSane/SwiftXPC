@@ -70,13 +70,21 @@ public func <(lhs: XPCDouble, rhs: XPCDouble) -> Bool {
     return lhs.value < rhs.value
 }
 
-public final class XPCNull : XPCObject {
+public func ==(lhs: XPCBool, rhs: XPCBool) -> Bool {
+    return lhs.value == rhs.value
+}
+
+public final class XPCNull : XPCObject, NilLiteralConvertible {
     public convenience init() {
         self.init(nativePointer: xpc_null_create())
     }
+    
+    public convenience init(nilLiteral: ()) {
+        self.init()
+    }
 }
 
-public final class XPCBool : XPCObject, BooleanLiteralConvertible, BooleanType {
+public final class XPCBool : XPCObject, BooleanLiteralConvertible, BooleanType, Equatable {
     required public convenience init(value: Bool) {
         self.init(nativePointer: xpc_bool_create(value))
     }
