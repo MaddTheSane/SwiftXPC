@@ -12,9 +12,8 @@ import XPC
 public final class XPCString : XPCObject, StringLiteralConvertible {
     required public convenience init(string contents: String, encoding: NSStringEncoding = NSUTF8StringEncoding) {
         let byteCount = contents.lengthOfBytesUsingEncoding(encoding)
-        var buffer = Array<CChar>()
+        var buffer = [CChar](count: byteCount, repeatedValue: CChar(0))
         
-        buffer.fill(CChar(0), desiredLength: byteCount)
         contents.getCString(&buffer, maxLength: byteCount, encoding: encoding)
         self.init(nativePointer: xpc_string_create(buffer))
     }

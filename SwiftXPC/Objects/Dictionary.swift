@@ -24,8 +24,7 @@ public final class XPCDictionary : XPCObject {
     public subscript(key: String) -> XPCObject {
         get {
             let byteCount = key.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)
-            var buffer = [CChar]()
-            buffer.fill(CChar(0), desiredLength: byteCount)
+            var buffer = [CChar](count: byteCount, repeatedValue: CChar(0))
             key.getCString(&buffer, maxLength: byteCount, encoding: NSUTF8StringEncoding)
             
             return XPCObject(nativePointer: xpc_dictionary_get_value(objectPointer, buffer))
@@ -33,8 +32,7 @@ public final class XPCDictionary : XPCObject {
         
         set {
             let byteCount = key.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)
-            var buffer = [CChar]()
-            buffer.fill(CChar(0), desiredLength: byteCount)
+            var buffer = [CChar](count: byteCount, repeatedValue: CChar(0))
             key.getCString(&buffer, maxLength: byteCount, encoding: NSUTF8StringEncoding)
             
             xpc_dictionary_set_value(objectPointer, buffer, newValue.objectPointer)
