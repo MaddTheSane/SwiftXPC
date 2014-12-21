@@ -12,10 +12,10 @@ import XPC
 public struct XPCArrayGenerator: GeneratorType {
     private let theArray: XPCArray
     private var status: Int
-    public init(array: XPCArray) {
+    private init(array: XPCArray) {
         status = 0
-        if let copiedArray = array.copy() {
-            theArray = XPCArray(nativePointer: copiedArray.objectPointer)
+        if let copiedArray = array.copy() as? XPCArray {
+            theArray = copiedArray
         } else {
             theArray = array
         }
@@ -30,8 +30,17 @@ public struct XPCArrayGenerator: GeneratorType {
     }
 }
 
+/// This will copy any array that is generated, to try and keep the array as static as possible.
 extension XPCArray: SequenceType {
     public func generate() -> XPCArrayGenerator {
         return XPCArrayGenerator(array: self)
+    }
+}
+
+extension XPCArray: ArrayLiteralConvertible {
+    typealias Element = XPCObject
+
+    convenience public init(arrayLiteral elements: XPCObject...) {
+        self.init(objects: elements)
     }
 }

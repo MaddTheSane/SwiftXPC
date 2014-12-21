@@ -27,7 +27,7 @@ public final class XPCDictionary : XPCObject {
             var buffer = [CChar](count: byteCount, repeatedValue: CChar(0))
             key.getCString(&buffer, maxLength: byteCount, encoding: NSUTF8StringEncoding)
             
-            return XPCObject(nativePointer: xpc_dictionary_get_value(objectPointer, buffer))
+            return nativeTypeForXPCObject(xpc_dictionary_get_value(objectPointer, buffer))
         }
         
         set {

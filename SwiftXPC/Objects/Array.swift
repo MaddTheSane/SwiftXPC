@@ -29,7 +29,7 @@ public final class XPCArray : XPCObject {
     public subscript(index: Int) -> XPCObject {
         get {
             let ptr = xpc_array_get_value(objectPointer, UInt(index))
-            return XPCObject(nativePointer: ptr)
+            return nativeTypeForXPCObject(ptr)
         }
         
         set {

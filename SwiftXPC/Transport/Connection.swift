@@ -35,7 +35,7 @@ public final class XPCConnection : XPCObject {
     public func setHandler(block: (XPCObject) -> ()) {
         xpc_connection_set_event_handler(objectPointer) {
             ptr in
-            block(XPCObject(nativePointer: ptr))
+            block(nativeTypeForXPCObject(ptr))
         }
     }
     
@@ -54,7 +54,7 @@ public final class XPCConnection : XPCObject {
     public func sendMessage(message: XPCDictionary, replyHandler: (XPCObject) -> ()) {
         xpc_connection_send_message_with_reply(objectPointer, message.objectPointer, nil) {
             obj in
-            replyHandler(XPCObject(nativePointer: obj))
+            replyHandler(nativeTypeForXPCObject(obj))
         }
     }
     
