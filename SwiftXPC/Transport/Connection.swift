@@ -16,8 +16,8 @@ public final class XPCConnection : XPCObject {
     }
     
     public convenience init(name: String, queue: dispatch_queue_t? = nil) {
-        let namePtr = name.cStringUsingEncoding(NSUTF8StringEncoding)
-        self.init(nativePointer: xpc_connection_create(namePtr!, queue))
+        let namePtr = name.cStringUsingEncoding(NSUTF8StringEncoding)!
+        self.init(nativePointer: xpc_connection_create(namePtr, queue))
     }
     
     public convenience init(anonymous: ()) {
@@ -81,27 +81,27 @@ public final class XPCConnection : XPCObject {
     }
     }
     
-    public var effectiveUserIdOfRemotePeer : Int {
+    public var effectiveUserIDOfRemotePeer : uid_t {
     get {
-        return Int(xpc_connection_get_euid(objectPointer))
+        return xpc_connection_get_euid(objectPointer)
     }
     }
     
-    public var effectiveGroupIdOfRemotePeer : Int {
+    public var effectiveGroupIDOfRemotePeer : gid_t {
     get {
-        return Int(xpc_connection_get_egid(objectPointer))
+        return xpc_connection_get_egid(objectPointer)
     }
     }
     
-    public var processIdOfRemotePeer : Int {
+    public var processIDOfRemotePeer : pid_t {
     get {
-        return Int(xpc_connection_get_pid(objectPointer))
+        return xpc_connection_get_pid(objectPointer)
     }
     }
     
-    public var auditSessionIdOfRemotePeer : Int {
+    public var auditSessionIDOfRemotePeer : au_asid_t {
     get {
-        return Int(xpc_connection_get_asid(objectPointer))
+        return xpc_connection_get_asid(objectPointer)
     }
     }
 }
