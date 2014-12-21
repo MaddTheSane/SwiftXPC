@@ -44,3 +44,15 @@ extension XPCArray: ArrayLiteralConvertible {
         self.init(objects: elements)
     }
 }
+
+extension XPCDictionary: DictionaryLiteralConvertible {
+    typealias Key = String
+    typealias Value = XPCObject
+    
+    public convenience init(dictionaryLiteral elements: (String, XPCObject)...) {
+        self.init()
+        for (key, value) in elements {
+            self[key] = value
+        }
+    }
+}
