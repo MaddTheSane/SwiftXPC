@@ -34,5 +34,8 @@ class SwiftXPC_Tests: XCTestCase {
         var bNum = XPCInt(value: 5)
         
         XCTAssert(aNum == bNum, "How!?")
+        
+        var aDouble: XPCDouble = 5
+        
     }
 }

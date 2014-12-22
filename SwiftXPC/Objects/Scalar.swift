@@ -133,9 +133,13 @@ public final class XPCUInt : XPCObject, IntegerLiteralConvertible, Comparable {
     }
 }
 
-public final class XPCDouble : XPCObject, FloatLiteralConvertible, Comparable {
-    required public convenience init(value: Double) {
+public final class XPCDouble : XPCObject, IntegerLiteralConvertible, FloatLiteralConvertible, Comparable {
+    public convenience init(value: Double) {
         self.init(nativePointer: xpc_double_create(value))
+    }
+    
+    public convenience init(integerLiteral: Int) {
+        self.init(value: Double(integerLiteral))
     }
     
     public convenience init(floatLiteral value: Double) {
