@@ -10,11 +10,11 @@ import Foundation
 import XPC
 
 public class XPCData : XPCObject {
-    required public convenience init(blob: NSData) {
+    public convenience init(blob: NSData) {
         self.init(nativePointer: xpc_data_create(blob.bytes, UInt(blob.length)))
     }
     
-    required public convenience init(text: String) {
+    public convenience init(text: String) {
         let blob = text.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
         self.init(blob: blob!)
     }

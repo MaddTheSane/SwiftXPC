@@ -20,7 +20,7 @@ import XPC
 // then will it be deallocated.
 
 public final class XPCSharedMemoryRegion : XPCObject {
-    required public convenience init(length: Int) {
+    public convenience init(length: Int) {
         let region = mmap(nil, UInt(length), PROT_READ | PROT_WRITE, MAP_ANON | MAP_SHARED, -1, 0)
         let nativePointer = xpc_shmem_create(region, UInt(length))
         self.init(nativePointer: nativePointer)

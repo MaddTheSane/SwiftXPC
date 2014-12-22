@@ -80,7 +80,7 @@ public final class XPCNull : XPCObject, NilLiteralConvertible {
 }
 
 public final class XPCBool : XPCObject, BooleanLiteralConvertible, BooleanType {
-    required public convenience init(value: Bool) {
+    public convenience init(value: Bool) {
         self.init(nativePointer: xpc_bool_create(value))
     }
     
@@ -102,7 +102,7 @@ public final class XPCInt : XPCObject, IntegerLiteralConvertible, Comparable {
         self.init(nativePointer: xpc_int64_create(Int64(value)))
     }
     
-    required public convenience init(value: Int64) {
+    public convenience init(value: Int64) {
         self.init(nativePointer: xpc_int64_create(value))
     }
     
@@ -120,7 +120,7 @@ public final class XPCUInt : XPCObject, IntegerLiteralConvertible, Comparable {
         self.init(nativePointer: xpc_uint64_create(UInt64(value)))
     }
     
-    required public convenience init(value: UInt64) {
+    public convenience init(value: UInt64) {
         self.init(nativePointer: xpc_uint64_create(value))
     }
     
