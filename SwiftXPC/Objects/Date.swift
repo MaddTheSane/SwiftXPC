@@ -28,8 +28,6 @@ public final class XPCDate : XPCObject {
     }
     
     public class var now : XPCDate {
-        get {
-            return XPCDate()
-        }
+        return XPCDate()
     }
 }
