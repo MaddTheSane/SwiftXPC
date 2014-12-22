@@ -20,9 +20,7 @@ public class XPCData : XPCObject {
     }
     
     public var length: Int {
-    get {
         return Int(xpc_data_get_length(objectPointer))
-    }
     }
     
     public func readData(offset: Int = 0) -> NSData? {

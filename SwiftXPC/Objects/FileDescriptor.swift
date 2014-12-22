@@ -25,8 +25,6 @@ public final class XPCFileDescriptor : XPCObject {
     }
     
     public var fileHandle : NSFileHandle {
-    get {
         return NSFileHandle(fileDescriptor: xpc_fd_dup(objectPointer), closeOnDealloc: true)
-    }
     }
 }

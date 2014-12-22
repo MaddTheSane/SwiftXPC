@@ -10,7 +10,7 @@ import Foundation
 import XPC
 
 public final class XPCString : XPCObject, StringLiteralConvertible {
-    required public convenience init(string contents: String, encoding: NSStringEncoding = NSUTF8StringEncoding) {
+    public convenience init(string contents: String, encoding: NSStringEncoding = NSUTF8StringEncoding) {
         let byteCount = contents.lengthOfBytesUsingEncoding(encoding)
         var buffer = [CChar](count: byteCount, repeatedValue: CChar(0))
         
@@ -23,15 +23,11 @@ public final class XPCString : XPCObject, StringLiteralConvertible {
     }
     
     public var length: Int {
-    get {
         return Int(xpc_string_get_length(objectPointer))
-    }
     }
     
     public var value: String? {
-    get {
         return String.fromCString(xpc_string_get_string_ptr(objectPointer))
-    }
     }
     
     public convenience init(stringLiteral value: String) {

@@ -61,9 +61,7 @@ public class XPCObject : Hashable, Printable {
     }
     
     public var XPCType: XPCObjectType {
-    get {
         return XPCObjectType(nativePointer: xpc_get_type(objectPointer))
-    }
     }
     
     public func copy() -> XPCObject? {
@@ -75,13 +73,10 @@ public class XPCObject : Hashable, Printable {
     }
     
     public var hashValue: Int {
-    get {
         return Int(xpc_hash(objectPointer))
-    }
     }
     
     public var description: String {
-    get {
         var nativeDesc = xpc_copy_description(objectPointer)
         let parsedDesc = String.fromCString(nativeDesc)
         free(nativeDesc)
@@ -91,7 +86,6 @@ public class XPCObject : Hashable, Printable {
         } else {
             return "(description unavailable)"
         }
-    }
     }
 }
 

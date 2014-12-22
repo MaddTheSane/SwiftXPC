@@ -27,9 +27,7 @@ public class XPCActivity: XPCObject {
         XPC_ACTIVITY_STATE_CONTINUE: .Continue, XPC_ACTIVITY_STATE_DONE: .Done ]
    
     public class var checkIn: XPCDictionary {
-    get {
         return XPCDictionary(nativePointer: XPC_ACTIVITY_CHECK_IN)
-    }
     }
     
     public class func register(identifier: String, criteria: XPCDictionary = checkIn, handler outerHandle: XPCActivityHandler) {
@@ -75,9 +73,7 @@ public class XPCActivity: XPCObject {
     }
     
     public var shouldDefer: Bool {
-    get {
         return xpc_activity_should_defer(objectPointer)
-    }
     }
     
 }

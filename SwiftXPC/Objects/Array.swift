@@ -38,8 +38,6 @@ public final class XPCArray : XPCObject {
     }
     
     public var count: Int {
-    get {
         return Int(xpc_array_get_count(objectPointer))
-    }
     }
 }

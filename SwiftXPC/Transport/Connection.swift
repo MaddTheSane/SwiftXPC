@@ -82,35 +82,25 @@ public final class XPCConnection : XPCObject {
     }
     
     public var effectiveUserIDOfRemotePeer : uid_t {
-    get {
         return xpc_connection_get_euid(objectPointer)
-    }
     }
     
     public var effectiveGroupIDOfRemotePeer : gid_t {
-    get {
         return xpc_connection_get_egid(objectPointer)
-    }
     }
     
     public var processIDOfRemotePeer : pid_t {
-    get {
         return xpc_connection_get_pid(objectPointer)
-    }
     }
     
     public var auditSessionIDOfRemotePeer : au_asid_t {
-    get {
         return xpc_connection_get_asid(objectPointer)
-    }
     }
 }
 
 extension XPCDictionary {
     public var remoteConnection: XPCConnection {
-    get {
         return XPCConnection(nativePointer: xpc_dictionary_get_remote_connection(objectPointer))
-    }
     }
     
     // Note: Due to the underlying implementation, this method will only work once.

@@ -30,8 +30,8 @@ public struct XPCArrayGenerator: GeneratorType {
     }
 }
 
-/// This will copy any array that is generated, to try and keep the array as static as possible.
 extension XPCArray: SequenceType {
+	/// This will attempt to copy any array that is generated, to try and keep the generator as static as possible.
     public func generate() -> XPCArrayGenerator {
         return XPCArrayGenerator(array: self)
     }

@@ -12,7 +12,7 @@ import XPC
 private let UUIDLength: UInt = (128 / 8)
 
 public final class XPCUUID : XPCObject {
-    required public convenience init(UUID: NSUUID) {
+    public convenience init(UUID: NSUUID) {
         var aNSUUIDBytes = [UInt8](count: 16, repeatedValue: 0)
         UUID.getUUIDBytes(&aNSUUIDBytes)
         self.init(nativePointer: xpc_uuid_create(aNSUUIDBytes))
@@ -39,19 +39,15 @@ public final class XPCUUID : XPCObject {
     }
     
     public var UUID: NSUUID {
-    get {
         let ourBytes = xpc_uuid_get_bytes(objectPointer)
         return NSUUID(UUIDBytes: ourBytes)
     }
-    }
     
     public var stringValue: String {
-    get {
         return UUID.UUIDString
-    }
     }
     
     public class func generateUUID() -> XPCUUID {
-        return XPCUUID(UUID: NSUUID())
+        return XPCUUID()
     }
 }

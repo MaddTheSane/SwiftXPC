@@ -85,9 +85,7 @@ public final class XPCBool : XPCObject, BooleanLiteralConvertible, BooleanType {
     }
     
     public var value: Bool {
-    get {
         return xpc_bool_get_value(objectPointer)
-    }
     }
     
     public convenience init(booleanLiteral value: Bool) {
@@ -95,9 +93,7 @@ public final class XPCBool : XPCObject, BooleanLiteralConvertible, BooleanType {
     }
     
     public var boolValue: Bool {
-    get {
         return value
-    }
     }
 }
 
@@ -115,9 +111,7 @@ public final class XPCInt : XPCObject, IntegerLiteralConvertible, Comparable {
     }
     
     public var value: Int64 {
-    get {
         return xpc_int64_get_value(objectPointer)
-    }
     }
 }
 
@@ -135,9 +129,7 @@ public final class XPCUInt : XPCObject, IntegerLiteralConvertible, Comparable {
     }
     
     public var value: UInt64 {
-    get {
         return xpc_uint64_get_value(objectPointer)
-    }
     }
 }
 
@@ -151,8 +143,6 @@ public final class XPCDouble : XPCObject, FloatLiteralConvertible, Comparable {
     }
     
     public var value: Double {
-    get {
         return xpc_double_get_value(objectPointer)
-    }
     }
 }
