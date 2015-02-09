@@ -23,15 +23,11 @@ public final class XPCDictionary : XPCObject {
     
     public subscript(key: String) -> XPCObject {
         get {
-            let buffer = UTFStringArray(key)
-            
-            return nativeTypeForXPCObject(xpc_dictionary_get_value(objectPointer, buffer))
+            return nativeTypeForXPCObject(xpc_dictionary_get_value(objectPointer, key))
         }
         
         set {
-            let buffer = UTFStringArray(key)
-            
-            xpc_dictionary_set_value(objectPointer, buffer, newValue.objectPointer)
+            xpc_dictionary_set_value(objectPointer, key, newValue.objectPointer)
         }
     }
     

@@ -19,10 +19,14 @@ internal func UTFStringArray(key: String, encoding: NSStringEncoding = NSUTF8Str
 }
 
 public final class XPCString : XPCObject, StringLiteralConvertible {
-    public convenience init(string contents: String, encoding: NSStringEncoding = NSUTF8StringEncoding) {
+    public convenience init(string contents: String, encoding: NSStringEncoding) {
         let buffer = UTFStringArray(contents, encoding: encoding)
         
         self.init(nativePointer: xpc_string_create(buffer))
+    }
+    
+    public convenience init(string contents: String) {
+        self.init(nativePointer: xpc_string_create(contents))
     }
     
     internal convenience init(cString: UnsafePointer<CChar>) {
