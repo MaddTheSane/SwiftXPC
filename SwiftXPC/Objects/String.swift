@@ -29,6 +29,7 @@ public final class XPCString : XPCObject, StringLiteralConvertible {
         self.init(nativePointer: xpc_string_create(contents))
     }
     
+    ///Used internally
     internal convenience init(cString: UnsafePointer<CChar>) {
         self.init(nativePointer: xpc_string_create(cString));
     }
