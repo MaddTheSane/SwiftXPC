@@ -106,7 +106,7 @@ public final class XPCInt : XPCObject, IntegerLiteralConvertible, Comparable {
         self.init(nativePointer: xpc_int64_create(value))
     }
     
-    public convenience init(integerLiteral value: Int64) {
+    public convenience init(integerLiteral value: Int) {
         self.init(value: value)
     }
     
@@ -124,8 +124,12 @@ public final class XPCUInt : XPCObject, IntegerLiteralConvertible, Comparable {
         self.init(nativePointer: xpc_uint64_create(value))
     }
     
-    public convenience init(integerLiteral value: UInt64) {
-        self.init(value: value)
+    public convenience init(value: Int) {
+        self.init(value: UInt64(value))
+    }
+    
+    public convenience init(integerLiteral value: Int) {
+        self.init(value: UInt64(value))
     }
     
     public var value: UInt64 {
@@ -136,6 +140,10 @@ public final class XPCUInt : XPCObject, IntegerLiteralConvertible, Comparable {
 public final class XPCDouble : XPCObject, IntegerLiteralConvertible, FloatLiteralConvertible, Comparable {
     public convenience init(value: Double) {
         self.init(nativePointer: xpc_double_create(value))
+    }
+    
+    public convenience init(value: Float) {
+        self.init(value: Double(value))
     }
     
     public convenience init(integerLiteral: Int) {

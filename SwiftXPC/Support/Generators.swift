@@ -38,9 +38,9 @@ extension XPCArray: SequenceType {
 }
 
 extension XPCArray: ArrayLiteralConvertible {
-    typealias Element = XPCObject
+    public typealias Element = XPCObject
 
-    convenience public init(arrayLiteral elements: XPCObject...) {
+    public convenience init(arrayLiteral elements: Element...) {
         self.init(objects: elements)
     }
 }
