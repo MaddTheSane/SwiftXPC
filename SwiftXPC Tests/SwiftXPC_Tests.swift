@@ -25,8 +25,10 @@ class SwiftXPC_Tests: XCTestCase {
     func testStringInit() {
         var aStr: XPCString = "Hello"
         let bStr = XPCString(string: "Hello")
+        let cStr: XPCString = "Hello!"
         
         XCTAssert(aStr == bStr, "How!?")
+        XCTAssert(cStr != bStr, "How!?")
     }
     
     func testScalarInit() {
@@ -37,5 +39,21 @@ class SwiftXPC_Tests: XCTestCase {
         
         var aDouble: XPCDouble = 5
         
+    }
+    
+    func testCopy() {
+        var aNum: XPCInt = 5
+
+        var bNum = aNum.copy()
+        if let aBNum = bNum as? XPCInt {
+            XCTAssert(aNum == aBNum, "How!?")
+        } else {
+            XCTAssert(false, "oops")
+        }
+    }
+    
+    func testComplexInit() {
+        var anArray: XPCArray = [XPCInt(value: 5), XPCInt(value: 3), XPCUInt(value: 5)]
+        var aDict: XPCDictionary = ["String": XPCString(string: "value")]
     }
 }
