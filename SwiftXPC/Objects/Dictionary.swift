@@ -23,17 +23,13 @@ public final class XPCDictionary : XPCObject {
     
     public subscript(key: String) -> XPCObject {
         get {
-            let byteCount = key.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) + 1
-            var buffer = [CChar](count: byteCount, repeatedValue: CChar(0))
-            key.getCString(&buffer, maxLength: byteCount, encoding: NSUTF8StringEncoding)
+            let buffer = UTFStringArray(key)
             
             return nativeTypeForXPCObject(xpc_dictionary_get_value(objectPointer, buffer))
         }
         
         set {
-            let byteCount = key.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) + 1
-            var buffer = [CChar](count: byteCount, repeatedValue: CChar(0))
-            key.getCString(&buffer, maxLength: byteCount, encoding: NSUTF8StringEncoding)
+            let buffer = UTFStringArray(key)
             
             xpc_dictionary_set_value(objectPointer, buffer, newValue.objectPointer)
         }

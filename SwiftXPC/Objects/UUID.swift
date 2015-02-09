@@ -19,7 +19,7 @@ public final class XPCUUID : XPCObject {
     }
     
     public convenience init(UUID: CFUUID) {
-        var uuidStr: String = CFUUIDCreateString(kCFAllocatorDefault, UUID)
+        var uuidStr = CFUUIDCreateString(kCFAllocatorDefault, UUID) as String
         var ourUUID = NSUUID(UUIDString: uuidStr)!
         self.init(UUID: ourUUID)
     }
