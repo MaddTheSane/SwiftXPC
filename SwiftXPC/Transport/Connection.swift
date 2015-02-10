@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import dispatch
+import Dispatch
 import XPC
 
 public final class XPCConnection : XPCObject {
