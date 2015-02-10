@@ -9,7 +9,7 @@
 import Foundation
 import XPC
 
-public enum XPCActivityState: Int {
+public enum XPCActivityState {
     case CheckIn
     case Wait
     case Run

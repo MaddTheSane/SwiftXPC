@@ -9,18 +9,11 @@
 import Foundation
 import XPC
 
-/// Used to get a C string from a Swift string.
-internal func UTFStringArray(key: String, encoding: NSStringEncoding = NSUTF8StringEncoding) -> [CChar] {
-    let byteCount = key.lengthOfBytesUsingEncoding(encoding) + 1
-    var buffer = [CChar](count: byteCount, repeatedValue: CChar(0))
-    key.getCString(&buffer, maxLength: byteCount, encoding: encoding)
-
-    return buffer
-}
-
 public final class XPCString : XPCObject, StringLiteralConvertible {
     public convenience init(string contents: String, encoding: NSStringEncoding) {
-        let buffer = UTFStringArray(contents, encoding: encoding)
+        let byteCount = contents.lengthOfBytesUsingEncoding(encoding) + 1
+        var buffer = [CChar](count: byteCount, repeatedValue: CChar(0))
+        contents.getCString(&buffer, maxLength: byteCount, encoding: encoding)
         
         self.init(nativePointer: xpc_string_create(buffer))
     }
