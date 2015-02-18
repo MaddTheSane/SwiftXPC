@@ -95,6 +95,10 @@ public final class XPCBool : XPCObject, BooleanLiteralConvertible, BooleanType {
     public var boolValue: Bool {
         return value
     }
+    
+    override public var description: String {
+        return value ? "YES" : "NO"
+    }
 }
 
 public final class XPCInt : XPCObject, IntegerLiteralConvertible, Comparable {
@@ -112,6 +116,10 @@ public final class XPCInt : XPCObject, IntegerLiteralConvertible, Comparable {
     
     public var value: Int64 {
         return xpc_int64_get_value(objectPointer)
+    }
+    
+    override public var description: String {
+        return "\(value)"
     }
 }
 
@@ -135,6 +143,10 @@ public final class XPCUInt : XPCObject, IntegerLiteralConvertible, Comparable {
     public var value: UInt64 {
         return xpc_uint64_get_value(objectPointer)
     }
+    
+    override public var description: String {
+        return "\(value)"
+    }
 }
 
 public final class XPCDouble : XPCObject, IntegerLiteralConvertible, FloatLiteralConvertible, Comparable {
@@ -156,5 +168,9 @@ public final class XPCDouble : XPCObject, IntegerLiteralConvertible, FloatLitera
     
     public var value: Double {
         return xpc_double_get_value(objectPointer)
+    }
+    
+    override public var description: String {
+        return "\(value)"
     }
 }

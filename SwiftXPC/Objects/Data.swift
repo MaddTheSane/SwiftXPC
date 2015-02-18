@@ -31,4 +31,8 @@ public class XPCData : XPCObject {
             return nil
         }
     }
+    
+    override public var description: String {
+        return readData()?.description ?? "(nil)"
+    }
 }

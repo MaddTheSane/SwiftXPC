@@ -50,4 +50,8 @@ public final class XPCUUID : XPCObject {
     public class func generateUUID() -> XPCUUID {
         return XPCUUID()
     }
+    
+    override public var description: String {
+        return stringValue
+    }
 }

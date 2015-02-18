@@ -48,4 +48,8 @@ public final class XPCString : XPCObject, StringLiteralConvertible {
         let outString = String(extendedGraphemeClusterLiteral: value)
         self.init(string: outString)
     }
+    
+    override public var description: String {
+        return "(\"\(value)\")"
+    }
 }

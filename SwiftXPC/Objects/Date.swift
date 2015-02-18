@@ -30,4 +30,8 @@ public final class XPCDate : XPCObject {
     public class var now : XPCDate {
         return XPCDate()
     }
+    
+    override public var description: String {
+        return value.description
+    }
 }
