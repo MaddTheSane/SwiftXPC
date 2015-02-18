@@ -13,39 +13,39 @@ public let XPCApiVersion = XPC_API_VERSION
 
 internal func nativeTypeForXPCObject(object: xpc_object_t) -> XPCObject {
     let objType = XPCObjectType(nativePointer: xpc_get_type(object))
-    if objType == XPCObjectType.array() {
+    if objType == XPCObjectType.array {
         return XPCArray(nativePointer: object)
-    } else if objType == XPCObjectType.activity() {
+    } else if objType == XPCObjectType.activity {
         return XPCActivity(nativePointer: object)
-    } else if objType == XPCObjectType.boolean() {
+    } else if objType == XPCObjectType.boolean {
         return XPCBool(nativePointer: object)
-    } else if objType == XPCObjectType.connection() {
+    } else if objType == XPCObjectType.connection {
         return XPCConnection(nativePointer: object)
-    } else if objType == XPCObjectType.data() {
+    } else if objType == XPCObjectType.data {
         return XPCData(nativePointer: object)
-    } else if objType == XPCObjectType.date() {
+    } else if objType == XPCObjectType.date {
         return XPCDate(nativePointer: object)
-    } else if objType == XPCObjectType.dictionary() {
+    } else if objType == XPCObjectType.dictionary {
         return XPCDictionary(nativePointer: object)
-    } else if objType == XPCObjectType.endpoint() {
+    } else if objType == XPCObjectType.endpoint {
         return XPCEndpoint(nativePointer: object)
-    } else if objType == XPCObjectType.error() {
+    } else if objType == XPCObjectType.error {
         return XPCDictionary(nativePointer: object)
-    } else if objType == XPCObjectType.fileDescriptor() {
+    } else if objType == XPCObjectType.fileDescriptor {
         return XPCFileDescriptor(nativePointer: object)
-    } else if objType == XPCObjectType.floatingPoint() {
+    } else if objType == XPCObjectType.floatingPoint {
         return XPCDouble(nativePointer: object)
-    } else if objType == XPCObjectType.integer() {
+    } else if objType == XPCObjectType.integer {
         return XPCInt(nativePointer: object)
-    } else if objType == XPCObjectType.nullPointer() {
+    } else if objType == XPCObjectType.nullPointer {
         return XPCNull(nativePointer: object)
-    } else if objType == XPCObjectType.sharedMemoryRegion() {
+    } else if objType == XPCObjectType.sharedMemoryRegion {
         return XPCSharedMemoryRegion(nativePointer: object)
-    } else if objType == XPCObjectType.string() {
+    } else if objType == XPCObjectType.string {
         return XPCString(nativePointer: object)
-    } else if objType == XPCObjectType.unsignedInteger() {
+    } else if objType == XPCObjectType.unsignedInteger {
         return XPCUInt(nativePointer: object)
-    } else if objType == XPCObjectType.UUID() {
+    } else if objType == XPCObjectType.UUID {
         return XPCUUID(nativePointer: object)
     } else {
         //Unknown or unsupported type

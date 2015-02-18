@@ -16,71 +16,71 @@ public final class XPCObjectType : Equatable {
         objectPointer = nativePointer
     }
     
-    public class func connection() -> XPCObjectType {
+    public class var connection: XPCObjectType {
         return XPCObjectType(nativePointer: XPCShimGetConnectionType())
     }
     
-    public class func endpoint() -> XPCObjectType {
+    public class var endpoint: XPCObjectType {
         return XPCObjectType(nativePointer: XPCShimGetEndpointType())
     }
     
-    public class func activity() -> XPCObjectType {
+    public class var activity: XPCObjectType {
         return XPCObjectType(nativePointer: XPCShimGetActivityType())
     }
     
-    public class func nullPointer() -> XPCObjectType {
+    public class var nullPointer: XPCObjectType {
         return XPCObjectType(nativePointer: XPCShimGetNullType())
     }
     
-    public class func boolean() -> XPCObjectType {
+    public class var boolean: XPCObjectType {
         return XPCObjectType(nativePointer: XPCShimGetBooleanType())
     }
     
-    public class func integer() -> XPCObjectType {
+    public class var integer: XPCObjectType {
         return XPCObjectType(nativePointer: XPCShimGetInt64Type())
     }
     
-    public class func unsignedInteger() -> XPCObjectType {
+    public class var unsignedInteger: XPCObjectType {
         return XPCObjectType(nativePointer: XPCShimGetUInt64Type())
     }
     
-    public class func floatingPoint() -> XPCObjectType {
+    public class var floatingPoint: XPCObjectType {
         return XPCObjectType(nativePointer: XPCShimGetDoubleType())
     }
     
-    public class func date() -> XPCObjectType {
+    public class var date: XPCObjectType {
         return XPCObjectType(nativePointer: XPCShimGetDateType())
     }
     
-    public class func data() -> XPCObjectType {
+    public class var data: XPCObjectType {
         return XPCObjectType(nativePointer: XPCShimGetDataType())
     }
     
-    public class func string() -> XPCObjectType {
+    public class var string: XPCObjectType {
         return XPCObjectType(nativePointer: XPCShimGetStringType())
     }
     
-    public class func UUID() -> XPCObjectType {
+    public class var UUID: XPCObjectType {
         return XPCObjectType(nativePointer: XPCShimGetUUIDType())
     }
     
-    public class func fileDescriptor() -> XPCObjectType {
+    public class var fileDescriptor: XPCObjectType {
         return XPCObjectType(nativePointer: XPCShimGetFileDescriptorType())
     }
     
-    public class func sharedMemoryRegion() -> XPCObjectType {
+    public class var sharedMemoryRegion: XPCObjectType {
         return XPCObjectType(nativePointer: XPCShimGetSharedMemoryType())
     }
     
-    public class func array() -> XPCObjectType {
+    public class var array: XPCObjectType {
         return XPCObjectType(nativePointer: XPCShimGetArrayType())
     }
     
-    public class func dictionary() -> XPCObjectType {
+    public class var dictionary: XPCObjectType {
         return XPCObjectType(nativePointer: XPCShimGetDictionaryType())
     }
     
-    public class func error() -> XPCObjectType {
+    public class var error: XPCObjectType {
         return XPCObjectType(nativePointer: XPCShimGetErrorType())
     }
 }
