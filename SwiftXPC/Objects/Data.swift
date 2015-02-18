@@ -25,7 +25,8 @@ public class XPCData : XPCObject {
     
     public func readData(offset: Int = 0) -> NSData? {
         if let data = NSMutableData(length: self.length) {
-            xpc_data_get_bytes(objectPointer, data.mutableBytes, UInt(offset), UInt(self.length))
+            let aCopied = xpc_data_get_bytes(objectPointer, data.mutableBytes, UInt(offset), UInt(self.length))
+            data.length = Int(aCopied)
             return NSData(data: data)
         } else {
             return nil
