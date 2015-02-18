@@ -52,7 +52,7 @@ public struct XPCDictGenerator: GeneratorType {
     private var i = 0
     
     public mutating func next() -> (key: String, object: XPCObject)? {
-        if i > keyArray.count {
+        if i < keyArray.count {
             let key = keyArray[i++]
             let obj = internalDict[key]!
             return (key, obj)

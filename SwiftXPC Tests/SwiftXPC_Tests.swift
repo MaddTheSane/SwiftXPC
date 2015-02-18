@@ -56,4 +56,12 @@ class SwiftXPC_Tests: XCTestCase {
         var anArray: XPCArray = [XPCInt(value: 5), XPCInt(value: 3), XPCUInt(value: 5)]
         var aDict: XPCDictionary = ["String": XPCString(string: "value")]
     }
+    
+    func testDictGenerator() {
+        var aDict: XPCDictionary = ["String": XPCString(string: "value"), "A Number": XPCInt(value: 5)]
+
+        for (key, obj) in aDict {
+            println("\(key): \(obj.description)")
+        }
+    }
 }
