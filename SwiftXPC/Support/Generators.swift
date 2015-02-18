@@ -66,7 +66,7 @@ public struct XPCDictGenerator: GeneratorType {
         var preDict = [String: XPCObject]()
         //We're using xpc_dictionary_apply to iterate over the array
         xpc_dictionary_apply(dictionary.objectPointer, { (name, object) -> Bool in
-            let swiftName = String(CString: name, encoding: NSUTF8StringEncoding)!
+            let swiftName = String.fromCString(name)!
             preKeyArray.append(swiftName)
             preDict[swiftName] = nativeTypeForXPCObject(object)
             
