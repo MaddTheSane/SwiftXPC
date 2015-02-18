@@ -9,22 +9,22 @@
 import Foundation
 import XPC
 
-public enum XPCActivityState {
-    case CheckIn
-    case Wait
-    case Run
-    case Defer
-    case Continue
-    case Done
-}
-
 public typealias XPCActivityHandler = (XPCActivity!) -> Void
 
-public class XPCActivity: XPCObject {
+private let XPCActivityStateShim: [xpc_activity_state_t: XPCActivity.State] = [XPC_ACTIVITY_STATE_CHECK_IN: .CheckIn,
+	XPC_ACTIVITY_STATE_WAIT: .Wait, XPC_ACTIVITY_STATE_RUN: .Run, XPC_ACTIVITY_STATE_DEFER: .Defer,
+	XPC_ACTIVITY_STATE_CONTINUE: .Continue, XPC_ACTIVITY_STATE_DONE: .Done ]
+
+final public class XPCActivity: XPCObject {
     
-    private let XPCActivityStateShim: [xpc_activity_state_t: XPCActivityState] = [XPC_ACTIVITY_STATE_CHECK_IN: .CheckIn,
-        XPC_ACTIVITY_STATE_WAIT: .Wait, XPC_ACTIVITY_STATE_RUN: .Run, XPC_ACTIVITY_STATE_DEFER: .Defer,
-        XPC_ACTIVITY_STATE_CONTINUE: .Continue, XPC_ACTIVITY_STATE_DONE: .Done ]
+    public enum State {
+        case CheckIn
+        case Wait
+        case Run
+        case Defer
+        case Continue
+        case Done
+    }
    
     public class var checkIn: XPCDictionary {
         return XPCDictionary(nativePointer: XPC_ACTIVITY_CHECK_IN)
@@ -41,7 +41,7 @@ public class XPCActivity: XPCObject {
         xpc_activity_unregister(identifier.cStringUsingEncoding(NSUTF8StringEncoding)!)
     }
     
-    public var state: XPCActivityState {
+    public var state: State {
     get {
         let out = xpc_activity_get_state(objectPointer)
         if let toRet = XPCActivityStateShim[out] {
