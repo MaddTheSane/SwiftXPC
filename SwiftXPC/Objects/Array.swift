@@ -28,16 +28,16 @@ public final class XPCArray : XPCObject {
     
     public subscript(index: Int) -> XPCObject {
         get {
-            let ptr = xpc_array_get_value(objectPointer, UInt(index))
+            let ptr = xpc_array_get_value(objectPointer, index)
             return nativeTypeForXPCObject(ptr)
         }
         
         set {
-            xpc_array_set_value(objectPointer, UInt(index), newValue.objectPointer)
+            xpc_array_set_value(objectPointer, index, newValue.objectPointer)
         }
     }
     
     public var count: Int {
-        return Int(xpc_array_get_count(objectPointer))
+        return xpc_array_get_count(objectPointer)
     }
 }
