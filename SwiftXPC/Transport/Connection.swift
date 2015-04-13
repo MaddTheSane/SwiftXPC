@@ -16,8 +16,7 @@ public final class XPCConnection : XPCObject {
     }
     
     public convenience init(name: String, queue: dispatch_queue_t? = nil) {
-        let namePtr = name.cStringUsingEncoding(NSUTF8StringEncoding)!
-        self.init(nativePointer: xpc_connection_create(namePtr, queue))
+        self.init(nativePointer: xpc_connection_create(name, queue))
     }
     
     public convenience init(anonymous: ()) {
@@ -71,14 +70,12 @@ public final class XPCConnection : XPCObject {
     // MARK: Properties
     
     public var name: String? {
-    get {
         let ptr = xpc_connection_get_name(objectPointer)
         if ptr != nil {
             return String.fromCString(ptr)
         } else {
             return nil
         }
-    }
     }
     
     public var effectiveUserIDOfRemotePeer : uid_t {
@@ -103,9 +100,9 @@ extension XPCDictionary {
         return XPCConnection(nativePointer: xpc_dictionary_get_remote_connection(objectPointer))
     }
     
-    // Note: Due to the underlying implementation, this method will only work once.
-    // Subsequent calls will return nil. In addition, if the receiver does not have
-    // a reply context, this method will always return nil.
+    /// Note: Due to the underlying implementation, this method will only work once.
+    /// Subsequent calls will return nil. In addition, if the receiver does not have
+    /// a reply context, this method will always return nil.
     public func createReply() -> XPCDictionary? {
         let ptr = xpc_dictionary_create_reply(objectPointer)
         if ptr == nil { return nil }

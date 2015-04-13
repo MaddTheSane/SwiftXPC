@@ -16,7 +16,6 @@ private let XPCActivityStateShim: [xpc_activity_state_t: XPCActivity.State] = [X
 	XPC_ACTIVITY_STATE_CONTINUE: .Continue, XPC_ACTIVITY_STATE_DONE: .Done ]
 
 final public class XPCActivity: XPCObject {
-    
     public enum State {
         case CheckIn
         case Wait
@@ -31,14 +30,14 @@ final public class XPCActivity: XPCObject {
     }
     
     public class func register(identifier: String, criteria: XPCDictionary = checkIn, handler outerHandle: XPCActivityHandler) {
-        xpc_activity_register(identifier.cStringUsingEncoding(NSUTF8StringEncoding)!, criteria.objectPointer) { (innerHandler) -> Void in
+        xpc_activity_register(identifier, criteria.objectPointer) { (innerHandler) -> Void in
             let activity = XPCActivity(nativePointer: innerHandler)
             outerHandle(activity)
         }
     }
     
     public class func deregister(identifier: String) {
-        xpc_activity_unregister(identifier.cStringUsingEncoding(NSUTF8StringEncoding)!)
+        xpc_activity_unregister(identifier)
     }
     
     public var state: State {

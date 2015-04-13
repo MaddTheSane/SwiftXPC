@@ -30,6 +30,7 @@ internal func nativeTypeForXPCObject(object: xpc_object_t) -> XPCObject {
     } else if objType == XPCObjectType.endpoint {
         return XPCEndpoint(nativePointer: object)
     } else if objType == XPCObjectType.error {
+        // Error types are dictionaries
         return XPCDictionary(nativePointer: object)
     } else if objType == XPCObjectType.fileDescriptor {
         return XPCFileDescriptor(nativePointer: object)
@@ -73,7 +74,7 @@ public class XPCObject : Hashable, Printable, DebugPrintable {
     }
     
     public var hashValue: Int {
-        return Int(xpc_hash(objectPointer))
+        return xpc_hash(objectPointer)
     }
     
     public var description: String {

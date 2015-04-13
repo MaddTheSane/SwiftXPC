@@ -10,20 +10,14 @@ import Foundation
 
 public final class XPCConnectionErrors {
     public class var connectionInterrupted : XPCDictionary {
-        get {
-            return XPCDictionary(nativePointer: XPCShimGetConnectionInterruptedError())
-        }
+        return XPCDictionary(nativePointer: XPCShimGetConnectionInterruptedError())
     }
     
     public class var connectionInvalid : XPCDictionary {
-        get {
-            return XPCDictionary(nativePointer: XPCShimGetConnectionInvalidError())
-        }
+        return XPCDictionary(nativePointer: XPCShimGetConnectionInvalidError())
     }
     
     public class var terminationImminent : XPCDictionary {
-        get {
-            return XPCDictionary(nativePointer: XPCShimGetTerminationImminentError())
-        }
+        return XPCDictionary(nativePointer: XPCShimGetTerminationImminentError())
     }
 }

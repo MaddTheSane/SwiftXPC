@@ -28,7 +28,7 @@ public final class XPCString : XPCObject, StringLiteralConvertible {
     }
     
     public var length: Int {
-        return Int(xpc_string_get_length(objectPointer))
+        return xpc_string_get_length(objectPointer)
     }
     
     public var value: String {
