@@ -58,7 +58,10 @@ final public class XPCActivity: XPCObject {
             }
         }
         
-        xpc_activity_set_state(objectPointer, toXPC)
+        if xpc_activity_set_state(objectPointer, toXPC) == false {
+            // TODO: throw
+            //throw NSError(domain: "", code: 0, userInfo: nil)
+        }
     }
     }
     
@@ -96,13 +99,14 @@ final public class XPCActivity: XPCObject {
 		return String.fromCString(XPC_ACTIVITY_REQUIRE_SCREEN_SLEEP)!
 	}
 	
+    /*
 	public class var requiredBatteryLevelKey: String {
 		return String.fromCString(XPC_ACTIVITY_REQUIRE_BATTERY_LEVEL)!
 	}
 	
 	public class var requiresHardDriveSpinningKey: String {
 		return String.fromCString(XPC_ACTIVITY_REQUIRE_HDD_SPINNING)!
-	}
+	}*/
 	
 	public class var activityRepeating: String {
 		return String.fromCString(XPC_ACTIVITY_REPEATING)!

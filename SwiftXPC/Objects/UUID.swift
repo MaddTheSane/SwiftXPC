@@ -19,8 +19,8 @@ public final class XPCUUID : XPCObject {
     }
     
     public convenience init(UUID: CFUUID) {
-        var uuidStr = CFUUIDCreateString(kCFAllocatorDefault, UUID) as String
-        var ourUUID = NSUUID(UUIDString: uuidStr)!
+        let uuidStr = CFUUIDCreateString(kCFAllocatorDefault, UUID) as String
+        let ourUUID = NSUUID(UUIDString: uuidStr)!
         self.init(UUID: ourUUID)
     }
     

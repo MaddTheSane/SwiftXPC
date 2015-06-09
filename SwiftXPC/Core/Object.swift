@@ -54,7 +54,7 @@ internal func nativeTypeForXPCObject(object: xpc_object_t) -> XPCObject {
     }
 }
 
-public class XPCObject : Hashable, Printable, DebugPrintable {
+public class XPCObject : Hashable, CustomStringConvertible, CustomDebugStringConvertible {
     internal var objectPointer : xpc_object_t
     
     internal init(nativePointer: xpc_object_t) {
@@ -82,7 +82,7 @@ public class XPCObject : Hashable, Printable, DebugPrintable {
     }
     
     final public var debugDescription: String {
-        var nativeDesc = xpc_copy_description(objectPointer)
+        let nativeDesc = xpc_copy_description(objectPointer)
         let parsedDesc = String.fromCString(nativeDesc)
         free(nativeDesc)
         
