@@ -78,9 +78,9 @@ public struct XPCDictGenerator: GeneratorType {
 }
 
 extension XPCDictionary: DictionaryLiteralConvertible, SequenceType {
-    typealias Key = String
-    typealias Value = XPCObject
-    typealias Generator = XPCDictGenerator
+    public typealias Key = String
+    public typealias Value = XPCObject
+    public typealias Generator = XPCDictGenerator
     
     public convenience init(dictionaryLiteral elements: (String, XPCObject)...) {
         self.init()
