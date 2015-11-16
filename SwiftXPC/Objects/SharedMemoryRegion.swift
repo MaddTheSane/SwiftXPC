@@ -33,7 +33,7 @@ public final class XPCSharedMemoryRegion : XPCObject {
             address in
             return XPCShimMapSharedMemoryRegion(self.objectPointer, address)
         })
-        if mem == nil { return nil }
+        guard mem != nil else { return nil }
         
         return SharedMemoryPointer(buffer: mem, length: Int(size))
     }

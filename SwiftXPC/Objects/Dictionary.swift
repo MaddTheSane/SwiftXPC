@@ -35,6 +35,6 @@ public final class XPCDictionary : XPCObject {
     }
     
     public var count: Int {
-        return Int(xpc_dictionary_get_count(objectPointer))
+        return xpc_dictionary_get_count(objectPointer)
     }
 }

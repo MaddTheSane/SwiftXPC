@@ -52,6 +52,6 @@ public final class XPCUUID : XPCObject {
     }
     
     override public var description: String {
-        return stringValue
+        return "UUID: \(stringValue)"
     }
 }

@@ -14,5 +14,5 @@ FOUNDATION_EXPORT double SwiftXPCVersionNumber;
 //! Project version string for SwiftXPC.
 FOUNDATION_EXPORT const unsigned char SwiftXPCVersionString[];
 
-#import "SwiftXPCShims.h"
+#import <SwiftXPC/SwiftXPCShims.h>
 

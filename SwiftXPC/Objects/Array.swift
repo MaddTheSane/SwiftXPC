@@ -31,7 +31,6 @@ public final class XPCArray : XPCObject {
             let ptr = xpc_array_get_value(objectPointer, index)
             return nativeTypeForXPCObject(ptr)
         }
-        
         set {
             xpc_array_set_value(objectPointer, index, newValue.objectPointer)
         }

@@ -9,7 +9,7 @@
 import Foundation
 import XPC
 
-public typealias XPCActivityHandler = (XPCActivity) -> Void
+public typealias XPCActivityHandler = (XPCActivity!) -> Void
 
 private let XPCActivityStateShim: [xpc_activity_state_t: XPCActivity.State] = [XPC_ACTIVITY_STATE_CHECK_IN: .CheckIn,
 	XPC_ACTIVITY_STATE_WAIT: .Wait, XPC_ACTIVITY_STATE_RUN: .Run, XPC_ACTIVITY_STATE_DEFER: .Defer,
@@ -50,11 +50,7 @@ final public class XPCActivity: XPCObject {
     public var state: State {
     get {
         let out = xpc_activity_get_state(objectPointer)
-        if let toRet = XPCActivityStateShim[out] {
-            return toRet
-        } else {
-            return .Wait
-        }
+        return XPCActivityStateShim[out]!
     }
     set {
         var toXPC: xpc_activity_state_t = 0
@@ -72,12 +68,18 @@ final public class XPCActivity: XPCObject {
     }
     }
     
-    public var criteria: XPCDictionary {
+    public var criteria: XPCDictionary? {
     get {
-        return XPCDictionary(nativePointer: xpc_activity_copy_criteria(objectPointer))
+        guard let aCri = xpc_activity_copy_criteria(objectPointer) else {
+            return nil
+        }
+        return XPCDictionary(nativePointer: aCri)
     }
     set {
-        xpc_activity_set_criteria(objectPointer, newValue.objectPointer)
+        guard let newVal = newValue else {
+            return
+        }
+        xpc_activity_set_criteria(objectPointer, newVal.objectPointer)
     }
     }
     

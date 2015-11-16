@@ -97,7 +97,7 @@ public final class XPCBool : XPCObject, BooleanLiteralConvertible, BooleanType {
     }
     
     override public var description: String {
-        return value ? "YES" : "NO"
+        return value ? "true" : "false"
     }
 }
 
@@ -136,7 +136,7 @@ public final class XPCUInt : XPCObject, IntegerLiteralConvertible, Comparable {
         self.init(value: UInt64(value))
     }
     
-    public convenience init(integerLiteral value: Int) {
+    public convenience init(integerLiteral value: UInt) {
         self.init(value: UInt64(value))
     }
     

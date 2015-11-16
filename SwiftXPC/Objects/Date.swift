@@ -27,7 +27,7 @@ public final class XPCDate : XPCObject {
         return NSDate(timeIntervalSince1970: interval)
     }
     
-    /// The current date and time
+    /// The current date and time.
     public class var now : XPCDate {
         return XPCDate()
     }

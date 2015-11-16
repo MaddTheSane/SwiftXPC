@@ -50,6 +50,6 @@ public final class XPCString : XPCObject, StringLiteralConvertible {
     }
     
     override public var description: String {
-        return "(\"\(value)\")"
+        return "String: (\"\(value)\")"
     }
 }
