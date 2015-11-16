@@ -22,11 +22,12 @@ public final class XPCDate : XPCObject {
     }
     
     public var value : NSDate {
-        let seconds = Int64(xpc_date_get_value(objectPointer))
+        let seconds = xpc_date_get_value(objectPointer)
         let interval = NSTimeInterval(seconds / nanosecondConversion)
         return NSDate(timeIntervalSince1970: interval)
     }
     
+    /// The current date and time
     public class var now : XPCDate {
         return XPCDate()
     }

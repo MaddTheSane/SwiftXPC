@@ -16,73 +16,73 @@ public final class XPCObjectType : Equatable {
         objectPointer = nativePointer
     }
     
-    public class var connection: XPCObjectType {
+    public static let connection: XPCObjectType = {
         return XPCObjectType(nativePointer: XPCShimGetConnectionType())
-    }
+    }()
     
-    public class var endpoint: XPCObjectType {
+    public static let endpoint: XPCObjectType = {
         return XPCObjectType(nativePointer: XPCShimGetEndpointType())
-    }
+    }()
     
-    public class var activity: XPCObjectType {
+    public static let activity: XPCObjectType = {
         return XPCObjectType(nativePointer: XPCShimGetActivityType())
-    }
+    }()
     
-    public class var nullPointer: XPCObjectType {
+    public static let nullPointer: XPCObjectType = {
         return XPCObjectType(nativePointer: XPCShimGetNullType())
-    }
+    }()
     
-    public class var boolean: XPCObjectType {
+    public static let boolean: XPCObjectType = {
         return XPCObjectType(nativePointer: XPCShimGetBooleanType())
-    }
+    }()
     
-    public class var integer: XPCObjectType {
+    public static let integer: XPCObjectType = {
         return XPCObjectType(nativePointer: XPCShimGetInt64Type())
-    }
+    }()
     
-    public class var unsignedInteger: XPCObjectType {
+    public static let unsignedInteger: XPCObjectType = {
         return XPCObjectType(nativePointer: XPCShimGetUInt64Type())
-    }
+    }()
     
-    public class var floatingPoint: XPCObjectType {
+    public static let floatingPoint: XPCObjectType = {
         return XPCObjectType(nativePointer: XPCShimGetDoubleType())
-    }
+    }()
     
-    public class var date: XPCObjectType {
+    public static let date: XPCObjectType = {
         return XPCObjectType(nativePointer: XPCShimGetDateType())
-    }
+    }()
     
-    public class var data: XPCObjectType {
+    public static let data: XPCObjectType = {
         return XPCObjectType(nativePointer: XPCShimGetDataType())
-    }
+    }()
     
-    public class var string: XPCObjectType {
+    public static let string: XPCObjectType = {
         return XPCObjectType(nativePointer: XPCShimGetStringType())
-    }
+    }()
     
-    public class var UUID: XPCObjectType {
+    public static let UUID: XPCObjectType = {
         return XPCObjectType(nativePointer: XPCShimGetUUIDType())
-    }
+    }()
     
-    public class var fileDescriptor: XPCObjectType {
+    public static let fileDescriptor: XPCObjectType = {
         return XPCObjectType(nativePointer: XPCShimGetFileDescriptorType())
-    }
+    }()
     
-    public class var sharedMemoryRegion: XPCObjectType {
+    public static let sharedMemoryRegion: XPCObjectType = {
         return XPCObjectType(nativePointer: XPCShimGetSharedMemoryType())
-    }
+    }()
     
-    public class var array: XPCObjectType {
+    public static let array: XPCObjectType = {
         return XPCObjectType(nativePointer: XPCShimGetArrayType())
-    }
+    }()
     
-    public class var dictionary: XPCObjectType {
+    public static let dictionary: XPCObjectType = {
         return XPCObjectType(nativePointer: XPCShimGetDictionaryType())
-    }
+    }()
     
-    public class var error: XPCObjectType {
+    public static let error: XPCObjectType = {
         return XPCObjectType(nativePointer: XPCShimGetErrorType())
-    }
+    }()
 }
 
 public func ==(lhs: XPCObjectType, rhs: XPCObjectType) -> Bool {

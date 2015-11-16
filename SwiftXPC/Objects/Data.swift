@@ -9,7 +9,7 @@
 import Foundation
 import XPC
 
-public class XPCData : XPCObject {
+public final class XPCData : XPCObject {
     public convenience init(blob: NSData) {
         self.init(nativePointer: xpc_data_create(blob.bytes, blob.length))
     }
@@ -24,16 +24,15 @@ public class XPCData : XPCObject {
     }
     
     public func readData(offset: Int = 0) -> NSData? {
-        if let data = NSMutableData(length: self.length) {
-            let aCopied = xpc_data_get_bytes(objectPointer, data.mutableBytes, offset, self.length)
-            data.length = aCopied
-            return NSData(data: data)
-        } else {
+        guard let data = NSMutableData(length: self.length) else {
             return nil
         }
+        let aCopied = xpc_data_get_bytes(objectPointer, data.mutableBytes, offset, self.length)
+        data.length = aCopied
+        return NSData(data: data)
     }
     
     override public var description: String {
-        return readData()?.description ?? "(nil)"
+        return "XPC data, \(length) bytes"
     }
 }

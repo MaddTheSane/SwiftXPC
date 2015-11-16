@@ -9,6 +9,7 @@
 import Foundation
 import XPC
 
+///The API version of libXPC that SwiftXPC was built on.
 public let XPCApiVersion = XPC_API_VERSION
 
 internal func nativeTypeForXPCObject(object: xpc_object_t) -> XPCObject {
@@ -54,6 +55,7 @@ internal func nativeTypeForXPCObject(object: xpc_object_t) -> XPCObject {
     }
 }
 
+/// The base class of all objects in the SwiftXPC framework
 public class XPCObject : Hashable, CustomStringConvertible, CustomDebugStringConvertible {
     internal var objectPointer : xpc_object_t
     
@@ -65,15 +67,15 @@ public class XPCObject : Hashable, CustomStringConvertible, CustomDebugStringCon
         return XPCObjectType(nativePointer: xpc_get_type(objectPointer))
     }
     
-    public func copy() -> XPCObject? {
-        if let copyPointer = xpc_copy(objectPointer) {
-            return nativeTypeForXPCObject(copyPointer)
-        } else {
+    ///Copy the current object into another object.
+    final public func copy() -> XPCObject? {
+        guard let copyPointer = xpc_copy(objectPointer) else {
             return nil
         }
+        return nativeTypeForXPCObject(copyPointer)
     }
     
-    public var hashValue: Int {
+    final public var hashValue: Int {
         return xpc_hash(objectPointer)
     }
     

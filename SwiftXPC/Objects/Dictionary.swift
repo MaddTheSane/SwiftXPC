@@ -21,13 +21,16 @@ public final class XPCDictionary : XPCObject {
         }
     }
     
-    public subscript(key: String) -> XPCObject {
+    public subscript(key: String) -> XPCObject? {
         get {
-            return nativeTypeForXPCObject(xpc_dictionary_get_value(objectPointer, key))
+            guard let nativeObj = xpc_dictionary_get_value(objectPointer, key) else {
+                return nil
+            }
+            return nativeTypeForXPCObject(nativeObj)
         }
         
         set {
-            xpc_dictionary_set_value(objectPointer, key, newValue.objectPointer)
+            xpc_dictionary_set_value(objectPointer, key, newValue?.objectPointer)
         }
     }
     
