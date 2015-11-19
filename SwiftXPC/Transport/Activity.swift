@@ -89,23 +89,23 @@ final public class XPCActivity: XPCObject {
 	
 	// MARK: Activity dictionary keys
 	public static let intervalKey: String = {
-		return String(XPC_ACTIVITY_INTERVAL)
+		return String.fromCString(XPC_ACTIVITY_INTERVAL)!
 	}()
 	
 	public static let gracePeriodKey: String = {
-		return String(XPC_ACTIVITY_GRACE_PERIOD)
+		return String.fromCString(XPC_ACTIVITY_GRACE_PERIOD)!
 	}()
 	
 	public static let priorityKey: String = {
-		return String(XPC_ACTIVITY_PRIORITY)
+		return String.fromCString(XPC_ACTIVITY_PRIORITY)!
 	}()
 	
 	public static let allowBatteryKey: String = {
-		return String(XPC_ACTIVITY_ALLOW_BATTERY)
+		return String.fromCString(XPC_ACTIVITY_ALLOW_BATTERY)!
 	}()
 	
 	public static let requiresScreenSleepKey: String = {
-		return String(XPC_ACTIVITY_REQUIRE_SCREEN_SLEEP)
+		return String.fromCString(XPC_ACTIVITY_REQUIRE_SCREEN_SLEEP)!
 	}()
 	
     /*
@@ -118,11 +118,11 @@ final public class XPCActivity: XPCObject {
 	}*/
 	
 	public static let activityRepeating: String = {
-		return String(XPC_ACTIVITY_REPEATING)
+		return String.fromCString(XPC_ACTIVITY_REPEATING)!
 	}()
 	
 	public static let activityDelay: String = {
-		return String(XPC_ACTIVITY_DELAY)
+		return String.fromCString(XPC_ACTIVITY_DELAY)!
 	}()
 	
 	public static let interval1Minute = XPCInt(value: XPC_ACTIVITY_INTERVAL_1_MIN)
