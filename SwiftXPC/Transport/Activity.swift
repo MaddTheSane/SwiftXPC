@@ -35,7 +35,7 @@ final public class XPCActivity: XPCObject {
         return XPCDictionary(nativePointer: XPC_ACTIVITY_CHECK_IN)
     }
     
-    public class func register(_ identifier: String, criteria: XPCDictionary = checkIn, handler outerHandle: XPCActivityHandler) {
+    public class func register(identifier: String, criteria: XPCDictionary = checkIn, handler outerHandle: XPCActivityHandler) {
         xpc_activity_register(identifier, criteria.objectPointer) { (innerHandler) -> Void in
             let activity = XPCActivity(nativePointer: innerHandler)
             outerHandle(activity)
@@ -43,7 +43,7 @@ final public class XPCActivity: XPCObject {
     }
     
     /// Unregisters an activity found by its identifier.
-    public class func deregister(_ identifier: String) {
+    public class func deregister(identifier: String) {
         xpc_activity_unregister(identifier)
     }
     

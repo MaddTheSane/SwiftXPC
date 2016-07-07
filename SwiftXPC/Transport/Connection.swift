@@ -27,11 +27,11 @@ public final class XPCConnection : XPCObject {
         self.init(nativePointer: xpc_connection_create_from_endpoint(endpoint.objectPointer))
     }
     
-    public func setTargetQueue(_ queue: DispatchQueue?) {
+    public func set(target queue: DispatchQueue?) {
         xpc_connection_set_target_queue(objectPointer, queue)
     }
     
-    public func setHandler(_ block: (XPCObject) -> ()) {
+    public func set(handler block: (XPCObject) -> ()) {
         xpc_connection_set_event_handler(objectPointer) {
             ptr in
             block(nativeTypeForXPCObject(ptr))
@@ -46,18 +46,18 @@ public final class XPCConnection : XPCObject {
         xpc_connection_resume(objectPointer)
     }
     
-    public func sendMessage(_ message: XPCDictionary) {
+    public func send(message: XPCDictionary) {
         xpc_connection_send_message(objectPointer, message.objectPointer)
     }
     
-    public func sendMessage(_ message: XPCDictionary, replyHandler: (XPCObject) -> ()) {
+    public func send(message: XPCDictionary, replyHandler: (XPCObject) -> ()) {
         xpc_connection_send_message_with_reply(objectPointer, message.objectPointer, nil) {
             obj in
             replyHandler(nativeTypeForXPCObject(obj))
         }
     }
     
-    public func sendBarrier(_ barrier: () -> ()) {
+    public func send(barrier: () -> ()) {
         xpc_connection_send_barrier(objectPointer) {
             barrier()
         }
@@ -104,9 +104,10 @@ extension XPCDictionary {
     /// Subsequent calls will return nil. In addition, if the receiver does not have
     /// a reply context, this method will always return nil.
     public func createReply() -> XPCDictionary? {
-        let ptr = xpc_dictionary_create_reply(objectPointer)
-        if ptr == nil { return nil }
+        guard let ptr = xpc_dictionary_create_reply(objectPointer) else {
+            return nil
+        }
         
-        return XPCDictionary(nativePointer: ptr!)
+        return XPCDictionary(nativePointer: ptr)
     }
 }

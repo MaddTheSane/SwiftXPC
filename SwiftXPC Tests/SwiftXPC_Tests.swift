@@ -8,7 +8,7 @@
 
 import Cocoa
 import XCTest
-import SwiftXPC
+@testable import SwiftXPC
 
 class SwiftXPC_Tests: XCTestCase {
     

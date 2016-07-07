@@ -28,8 +28,6 @@ public final class XPCUUID : XPCObject {
         if let ourUUID = Foundation.UUID(uuidString: UUIDString) {
             self.init(UUID: ourUUID)
         } else {
-            self.init(UUID: Foundation.UUID())
-            
             return nil
         }
     }
