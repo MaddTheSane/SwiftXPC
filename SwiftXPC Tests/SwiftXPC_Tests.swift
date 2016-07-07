@@ -58,10 +58,12 @@ class SwiftXPC_Tests: XCTestCase {
     }
     
     func testDictGenerator() {
-        var aDict: XPCDictionary = ["String": XPCString(string: "value"), "A Number": XPCInt(value: 5)]
+        let aDict: XPCDictionary = ["String": XPCString(string: "value"), "A Number": XPCInt(value: 5)]
 
         for (key, obj) in aDict {
             print("\(key): \(obj.description)")
         }
+        
+        XCTAssertEqual(aDict["String"], XPCString(string: "value"))
     }
 }

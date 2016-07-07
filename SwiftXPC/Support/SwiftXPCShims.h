@@ -13,6 +13,8 @@
 // FIXME: unfortunately there isn't a way to get them to work without this header being public.
 // SwiftXPCShims is required due to the ObjC-Swift bridge not exposing certain XPC APIs correctly.
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark Type Shims
 
 extern xpc_type_t XPCShimGetConnectionType(void);
@@ -41,8 +43,10 @@ extern xpc_object_t XPCShimGetTerminationImminentError(void);
 
 #pragma mark xpc_shmem
 
-extern unsigned char * XPCShimMapSharedMemoryRegion(xpc_object_t region, size_t *size);
+extern unsigned char *_Nullable XPCShimMapSharedMemoryRegion(xpc_object_t region, size_t *size);
 
 #pragma mark xpc_main()
 
 extern void __attribute__((noreturn)) XPCShimMain(void (^)(xpc_connection_t connection));
+
+NS_ASSUME_NONNULL_END
