@@ -9,7 +9,7 @@
 import Foundation
 import XPC
 
-public struct XPCArrayGenerator: GeneratorType {
+public struct XPCArrayIterator: IteratorProtocol {
     private let theArray: XPCArray
     private var status: Int
     
@@ -26,15 +26,17 @@ public struct XPCArrayGenerator: GeneratorType {
         if status >= theArray.count {
             return nil
         } else {
-            return theArray[status++]
+            let toRet = theArray[status]
+            status += 1
+            return toRet
         }
     }
 }
 
-extension XPCArray: SequenceType {
+extension XPCArray: Sequence {
 	/// This will attempt to copy any array that is generated, to try and keep the generator as static as possible.
-    public func generate() -> XPCArrayGenerator {
-        return XPCArrayGenerator(array: self)
+    public func makeIterator() -> XPCArrayIterator {
+        return XPCArrayIterator(array: self)
     }
 }
 
@@ -46,14 +48,15 @@ extension XPCArray: ArrayLiteralConvertible {
     }
 }
 
-public struct XPCDictGenerator: GeneratorType {
+public struct XPCDictIterator: IteratorProtocol {
     private let keyArray: [String]
     private let internalDict: [String: XPCObject]
     private var i = 0
     
     public mutating func next() -> (key: String, object: XPCObject)? {
         if i < keyArray.count {
-            let key = keyArray[i++]
+            let key = keyArray[i]
+            i += 1
             let obj = internalDict[key]!
             return (key, obj)
         } else {
@@ -66,7 +69,7 @@ public struct XPCDictGenerator: GeneratorType {
         var preDict = [String: XPCObject]()
         //We're using xpc_dictionary_apply to iterate over the array
         xpc_dictionary_apply(dictionary.objectPointer, { (name, object) -> Bool in
-            let swiftName = String.fromCString(name)!
+            let swiftName = String(cString: name)
             preKeyArray.append(swiftName)
             preDict[swiftName] = nativeTypeForXPCObject(object)
             
@@ -77,10 +80,10 @@ public struct XPCDictGenerator: GeneratorType {
     }
 }
 
-extension XPCDictionary: DictionaryLiteralConvertible, SequenceType {
+extension XPCDictionary: DictionaryLiteralConvertible, Sequence {
     public typealias Key = String
     public typealias Value = XPCObject
-    public typealias Generator = XPCDictGenerator
+    public typealias Iterator = XPCDictIterator
     
     public convenience init(dictionaryLiteral elements: (String, XPCObject)...) {
         self.init()
@@ -89,7 +92,7 @@ extension XPCDictionary: DictionaryLiteralConvertible, SequenceType {
         }
     }
     
-    public func generate() -> XPCDictGenerator {
-        return XPCDictGenerator(dictionary: self)
+    public func makeIterator() -> XPCDictIterator {
+        return XPCDictIterator(dictionary: self)
     }
 }

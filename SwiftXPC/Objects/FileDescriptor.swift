@@ -10,8 +10,8 @@ import Foundation
 import XPC
 
 public final class XPCFileDescriptor : XPCObject {
-    public convenience init(fileHandle: NSFileHandle) {
-        self.init(nativePointer: xpc_fd_create(fileHandle.fileDescriptor))
+    public convenience init(fileHandle: FileHandle) {
+        self.init(nativePointer: xpc_fd_create(fileHandle.fileDescriptor)!)
     }
     
     public convenience init?(fileDescriptor: Int32) {
@@ -24,8 +24,8 @@ public final class XPCFileDescriptor : XPCObject {
         }
     }
     
-    public var fileHandle : NSFileHandle {
-        return NSFileHandle(fileDescriptor: xpc_fd_dup(objectPointer), closeOnDealloc: true)
+    public var fileHandle : FileHandle {
+        return FileHandle(fileDescriptor: xpc_fd_dup(objectPointer), closeOnDealloc: true)
     }
     
     override public var description: String {

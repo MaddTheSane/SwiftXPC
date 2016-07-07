@@ -12,7 +12,7 @@ import XPC
 ///The API version of libXPC that SwiftXPC was built on.
 public let XPCApiVersion = XPC_API_VERSION
 
-internal func nativeTypeForXPCObject(object: xpc_object_t) -> XPCObject {
+internal func nativeTypeForXPCObject(_ object: xpc_object_t) -> XPCObject {
     let objType = XPCObjectType(nativePointer: xpc_get_type(object))
     if objType == XPCObjectType.array {
         return XPCArray(nativePointer: object)
@@ -85,14 +85,10 @@ public class XPCObject : Hashable, CustomStringConvertible, CustomDebugStringCon
     
     final public var debugDescription: String {
         let nativeDesc = xpc_copy_description(objectPointer)
-        let parsedDesc = String.fromCString(nativeDesc)
-        free(nativeDesc)
-        
-        if let realDesc = parsedDesc {
-            return realDesc
-        } else {
-            return "(description unavailable)"
+        defer {
+            free(nativeDesc)
         }
+        return String(cString: nativeDesc)
     }
 }
 

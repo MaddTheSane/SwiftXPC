@@ -12,7 +12,7 @@ import XPC
 private let nanosecondConversion : Int64 = 1_000_000_000
 
 public final class XPCDate : XPCObject {
-    public convenience init(value: NSDate) {
+    public convenience init(value: Date) {
         let seconds = Int64(value.timeIntervalSince1970)
         self.init(nativePointer: xpc_date_create(seconds * nanosecondConversion))
     }
@@ -21,10 +21,10 @@ public final class XPCDate : XPCObject {
         self.init(nativePointer: xpc_date_create_from_current())
     }
     
-    public var value : NSDate {
+    public var value : Date {
         let seconds = xpc_date_get_value(objectPointer)
-        let interval = NSTimeInterval(seconds / nanosecondConversion)
-        return NSDate(timeIntervalSince1970: interval)
+        let interval = TimeInterval(seconds / nanosecondConversion)
+        return Date(timeIntervalSince1970: interval)
     }
     
     /// The current date and time.

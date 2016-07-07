@@ -21,7 +21,7 @@ import XPC
 public final class XPCSharedMemoryRegion : XPCObject {
     public convenience init(length: Int) {
         let region = mmap(nil, length, PROT_READ | PROT_WRITE, MAP_ANON | MAP_SHARED, -1, 0)
-        let nativePointer = xpc_shmem_create(region, length)
+        let nativePointer = xpc_shmem_create(region!, length)
         self.init(nativePointer: nativePointer)
         munmap(region, length)
     }
@@ -29,13 +29,13 @@ public final class XPCSharedMemoryRegion : XPCObject {
     public func readMemory() -> SharedMemoryPointer? {
         var size : Int = 0
         
-        let mem : UnsafeMutablePointer<UInt8> = withUnsafeMutablePointer(&size, {
+        let mem : UnsafeMutablePointer<UInt8>? = withUnsafeMutablePointer(&size, {
             address in
             return XPCShimMapSharedMemoryRegion(self.objectPointer, address)
         })
         guard mem != nil else { return nil }
         
-        return SharedMemoryPointer(buffer: mem, length: Int(size))
+        return SharedMemoryPointer(buffer: mem!, length: Int(size))
     }
 }
 

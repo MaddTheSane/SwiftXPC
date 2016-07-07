@@ -22,7 +22,7 @@ public final class XPCArray : XPCObject {
         }
     }
     
-    public func append(value: XPCObject) {
+    public func append(_ value: XPCObject) {
         xpc_array_append_value(objectPointer, value.objectPointer)
     }
     

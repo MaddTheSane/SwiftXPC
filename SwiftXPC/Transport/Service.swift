@@ -10,7 +10,7 @@ import Foundation
 import XPC
 
 public final class XPCService {
-    @noreturn public class func run(handler: (XPCConnection) -> ()) {
+    @noreturn public class func run(_ handler: (XPCConnection) -> ()) {
         XPCShimMain {
             ptr in
             handler(XPCConnection(nativePointer: ptr))
@@ -35,7 +35,7 @@ public final class XPCService {
         xpc_transaction_end()
     }
     
-    public class func performTransaction(callback: () -> ()) {
+    public class func performTransaction(_ callback: () -> ()) {
         beginTransaction()
         callback()
         endTransaction()

@@ -11,31 +11,31 @@ import XPC
 
 public typealias XPCActivityHandler = (XPCActivity!) -> Void
 
-private let XPCActivityStateShim: [xpc_activity_state_t: XPCActivity.State] = [XPC_ACTIVITY_STATE_CHECK_IN: .CheckIn,
-	XPC_ACTIVITY_STATE_WAIT: .Wait, XPC_ACTIVITY_STATE_RUN: .Run, XPC_ACTIVITY_STATE_DEFER: .Defer,
-	XPC_ACTIVITY_STATE_CONTINUE: .Continue, XPC_ACTIVITY_STATE_DONE: .Done ]
+private let XPCActivityStateShim: [xpc_activity_state_t: XPCActivity.State] = [XPC_ACTIVITY_STATE_CHECK_IN: .checkIn,
+	XPC_ACTIVITY_STATE_WAIT: .wait, XPC_ACTIVITY_STATE_RUN: .run, XPC_ACTIVITY_STATE_DEFER: .defer,
+	XPC_ACTIVITY_STATE_CONTINUE: .continue, XPC_ACTIVITY_STATE_DONE: .done ]
 
 final public class XPCActivity: XPCObject {
     public enum State {
         ///Refer to `XPC_ACTIVITY_STATE_CHECK_IN`.
-        case CheckIn
+        case checkIn
         ///Refer to `XPC_ACTIVITY_STATE_WAIT`.
-        case Wait
+        case wait
         ///Refer to `XPC_ACTIVITY_STATE_RUN`.
-        case Run
+        case run
         ///Refer to `XPC_ACTIVITY_STATE_DEFER`.
-        case Defer
+        case `defer`
         ///Refer to `XPC_ACTIVITY_STATE_CONTINUE`.
-        case Continue
+        case `continue`
         ///Refer to `XPC_ACTIVITY_STATE_DONE`.
-        case Done
+        case done
     }
    
     public class var checkIn: XPCDictionary {
         return XPCDictionary(nativePointer: XPC_ACTIVITY_CHECK_IN)
     }
     
-    public class func register(identifier: String, criteria: XPCDictionary = checkIn, handler outerHandle: XPCActivityHandler) {
+    public class func register(_ identifier: String, criteria: XPCDictionary = checkIn, handler outerHandle: XPCActivityHandler) {
         xpc_activity_register(identifier, criteria.objectPointer) { (innerHandler) -> Void in
             let activity = XPCActivity(nativePointer: innerHandler)
             outerHandle(activity)
@@ -43,7 +43,7 @@ final public class XPCActivity: XPCObject {
     }
     
     /// Unregisters an activity found by its identifier.
-    public class func deregister(identifier: String) {
+    public class func deregister(_ identifier: String) {
         xpc_activity_unregister(identifier)
     }
     
@@ -89,23 +89,23 @@ final public class XPCActivity: XPCObject {
 	
 	// MARK: Activity dictionary keys
 	public static let intervalKey: String = {
-		return String.fromCString(XPC_ACTIVITY_INTERVAL)!
+		return String(cString: XPC_ACTIVITY_INTERVAL)
 	}()
 	
 	public static let gracePeriodKey: String = {
-		return String.fromCString(XPC_ACTIVITY_GRACE_PERIOD)!
+		return String(cString: XPC_ACTIVITY_GRACE_PERIOD)
 	}()
 	
 	public static let priorityKey: String = {
-		return String.fromCString(XPC_ACTIVITY_PRIORITY)!
+		return String(cString: XPC_ACTIVITY_PRIORITY)
 	}()
 	
 	public static let allowBatteryKey: String = {
-		return String.fromCString(XPC_ACTIVITY_ALLOW_BATTERY)!
+		return String(cString: XPC_ACTIVITY_ALLOW_BATTERY)
 	}()
 	
 	public static let requiresScreenSleepKey: String = {
-		return String.fromCString(XPC_ACTIVITY_REQUIRE_SCREEN_SLEEP)!
+		return String(cString: XPC_ACTIVITY_REQUIRE_SCREEN_SLEEP)
 	}()
 	
     /*
@@ -118,11 +118,11 @@ final public class XPCActivity: XPCObject {
 	}*/
 	
 	public static let activityRepeating: String = {
-		return String.fromCString(XPC_ACTIVITY_REPEATING)!
+		return String(cString: XPC_ACTIVITY_REPEATING)
 	}()
 	
 	public static let activityDelay: String = {
-		return String.fromCString(XPC_ACTIVITY_DELAY)!
+		return String(cString: XPC_ACTIVITY_DELAY)
 	}()
 	
 	public static let interval1Minute = XPCInt(value: XPC_ACTIVITY_INTERVAL_1_MIN)

@@ -79,7 +79,7 @@ public final class XPCNull : XPCObject, NilLiteralConvertible {
     }
 }
 
-public final class XPCBool : XPCObject, BooleanLiteralConvertible, BooleanType {
+public final class XPCBool : XPCObject, BooleanLiteralConvertible, Boolean {
     public convenience init(value: Bool) {
         self.init(nativePointer: xpc_bool_create(value))
     }

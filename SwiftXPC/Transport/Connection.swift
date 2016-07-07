@@ -15,7 +15,7 @@ public final class XPCConnection : XPCObject {
         return XPCConnection(anonymous: ())
     }
     
-    public convenience init(name: String, queue: dispatch_queue_t? = nil) {
+    public convenience init(name: String, queue: DispatchQueue? = nil) {
         self.init(nativePointer: xpc_connection_create(name, queue))
     }
     
@@ -27,11 +27,11 @@ public final class XPCConnection : XPCObject {
         self.init(nativePointer: xpc_connection_create_from_endpoint(endpoint.objectPointer))
     }
     
-    public func setTargetQueue(queue: dispatch_queue_t?) {
+    public func setTargetQueue(_ queue: DispatchQueue?) {
         xpc_connection_set_target_queue(objectPointer, queue)
     }
     
-    public func setHandler(block: (XPCObject) -> ()) {
+    public func setHandler(_ block: (XPCObject) -> ()) {
         xpc_connection_set_event_handler(objectPointer) {
             ptr in
             block(nativeTypeForXPCObject(ptr))
@@ -46,18 +46,18 @@ public final class XPCConnection : XPCObject {
         xpc_connection_resume(objectPointer)
     }
     
-    public func sendMessage(message: XPCDictionary) {
+    public func sendMessage(_ message: XPCDictionary) {
         xpc_connection_send_message(objectPointer, message.objectPointer)
     }
     
-    public func sendMessage(message: XPCDictionary, replyHandler: (XPCObject) -> ()) {
+    public func sendMessage(_ message: XPCDictionary, replyHandler: (XPCObject) -> ()) {
         xpc_connection_send_message_with_reply(objectPointer, message.objectPointer, nil) {
             obj in
             replyHandler(nativeTypeForXPCObject(obj))
         }
     }
     
-    public func sendBarrier(barrier: () -> ()) {
+    public func sendBarrier(_ barrier: () -> ()) {
         xpc_connection_send_barrier(objectPointer) {
             barrier()
         }
@@ -71,8 +71,8 @@ public final class XPCConnection : XPCObject {
     
     public var name: String? {
         let ptr = xpc_connection_get_name(objectPointer)
-        if ptr != nil {
-            return String.fromCString(ptr)
+        if let ptr = ptr {
+            return String(cString: ptr)
         } else {
             return nil
         }
@@ -97,7 +97,7 @@ public final class XPCConnection : XPCObject {
 
 extension XPCDictionary {
     public var remoteConnection: XPCConnection {
-        return XPCConnection(nativePointer: xpc_dictionary_get_remote_connection(objectPointer))
+        return XPCConnection(nativePointer: xpc_dictionary_get_remote_connection(objectPointer)!)
     }
     
     /// Note: Due to the underlying implementation, this method will only work once.
@@ -107,6 +107,6 @@ extension XPCDictionary {
         let ptr = xpc_dictionary_create_reply(objectPointer)
         if ptr == nil { return nil }
         
-        return XPCDictionary(nativePointer: ptr)
+        return XPCDictionary(nativePointer: ptr!)
     }
 }
