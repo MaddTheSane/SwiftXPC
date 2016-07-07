@@ -8,7 +8,7 @@
 
 import Cocoa
 import XCTest
-import SwiftXPC
+@testable import SwiftXPC
 
 class SwiftXPC_Tests: XCTestCase {
     
@@ -27,15 +27,15 @@ class SwiftXPC_Tests: XCTestCase {
         let bStr = XPCString(string: "Hello")
         let cStr: XPCString = "Hello!"
         
-        XCTAssert(aStr == bStr, "How!?")
-        XCTAssert(cStr != bStr, "How!?")
+        XCTAssertEqual(aStr, bStr, "How!?")
+        XCTAssertNotEqual(cStr, bStr, "How!?")
     }
     
     func testScalarInit() {
         let aNum: XPCInt = 5
         var bNum = XPCInt(value: 5)
         
-        XCTAssert(aNum == bNum, "How!?")
+        XCTAssertEqual(aNum, bNum, "How!?")
         
         var aDouble: XPCDouble = 5
         
@@ -46,7 +46,7 @@ class SwiftXPC_Tests: XCTestCase {
 
         let bNum = aNum.copy()
         if let aBNum = bNum as? XPCInt {
-            XCTAssert(aNum == aBNum, "How!?")
+            XCTAssertEqual(aNum, aBNum, "How!?")
         } else {
             XCTAssert(false, "oops")
         }

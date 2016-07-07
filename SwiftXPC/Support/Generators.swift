@@ -26,7 +26,9 @@ public struct XPCArrayGenerator: GeneratorType {
         if status >= theArray.count {
             return nil
         } else {
-            return theArray[status++]
+            let currStatus = theArray[status]
+            status += 1
+            return currStatus
         }
     }
 }
@@ -53,7 +55,8 @@ public struct XPCDictGenerator: GeneratorType {
     
     public mutating func next() -> (key: String, object: XPCObject)? {
         if i < keyArray.count {
-            let key = keyArray[i++]
+            let key = keyArray[i]
+            i += 1
             let obj = internalDict[key]!
             return (key, obj)
         } else {

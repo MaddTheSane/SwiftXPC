@@ -9,7 +9,7 @@
 import Foundation
 import XPC
 
-///The API version of libXPC that SwiftXPC was built on.
+///The API version of libXPC that SwiftXPC was built against.
 public let XPCApiVersion = XPC_API_VERSION
 
 internal func nativeTypeForXPCObject(object: xpc_object_t) -> XPCObject {
