@@ -14,42 +14,56 @@ public let XPCApiVersion = XPC_API_VERSION
 
 internal func nativeTypeForXPCObject(_ object: xpc_object_t) -> XPCObject {
     let objType = XPCObjectType(nativePointer: xpc_get_type(object))
-    if objType == XPCObjectType.array {
+    switch objType {
+    case .array:
         return XPCArray(nativePointer: object)
-    } else if objType == XPCObjectType.activity {
+        
+    case .activity:
         return XPCActivity(nativePointer: object)
-    } else if objType == XPCObjectType.boolean {
+        
+    case .boolean:
         return XPCBool(nativePointer: object)
-    } else if objType == XPCObjectType.connection {
+        
+    case .connection:
         return XPCConnection(nativePointer: object)
-    } else if objType == XPCObjectType.data {
+
+    case .data:
         return XPCData(nativePointer: object)
-    } else if objType == XPCObjectType.date {
+
+    case .date:
         return XPCDate(nativePointer: object)
-    } else if objType == XPCObjectType.dictionary {
+
+    case .dictionary, /* Error types are dictionaries*/ .error:
         return XPCDictionary(nativePointer: object)
-    } else if objType == XPCObjectType.endpoint {
+        
+    case .endpoint:
         return XPCEndpoint(nativePointer: object)
-    } else if objType == XPCObjectType.error {
-        // Error types are dictionaries
-        return XPCDictionary(nativePointer: object)
-    } else if objType == XPCObjectType.fileDescriptor {
+        
+    case .fileDescriptor:
         return XPCFileDescriptor(nativePointer: object)
-    } else if objType == XPCObjectType.floatingPoint {
+
+    case .floatingPoint:
         return XPCDouble(nativePointer: object)
-    } else if objType == XPCObjectType.integer {
+        
+    case .integer:
         return XPCInt(nativePointer: object)
-    } else if objType == XPCObjectType.nullPointer {
+
+    case .nullPointer:
         return XPCNull(nativePointer: object)
-    } else if objType == XPCObjectType.sharedMemoryRegion {
+        
+    case .sharedMemoryRegion:
         return XPCSharedMemoryRegion(nativePointer: object)
-    } else if objType == XPCObjectType.string {
+        
+    case .string:
         return XPCString(nativePointer: object)
-    } else if objType == XPCObjectType.unsignedInteger {
+        
+    case .unsignedInteger:
         return XPCUInt(nativePointer: object)
-    } else if objType == XPCObjectType.UUID {
+
+    case .UUID:
         return XPCUUID(nativePointer: object)
-    } else {
+
+    default:
         //Unknown or unsupported type
         return XPCObject(nativePointer: object)
     }

@@ -34,11 +34,17 @@ class SwiftXPC_Tests: XCTestCase {
     func testScalarInit() {
         let aNum: XPCInt = 5
         var bNum = XPCInt(value: 5)
-        
+        let cNum: XPCInt = 6
+
         XCTAssert(aNum == bNum, "How!?")
-        
+        XCTAssert(aNum != cNum, "How!?")
+        bNum = 9
+        XCTAssert(aNum != bNum, "How!?")
+
         var aDouble: XPCDouble = 5
-        
+        XCTAssert(aNum != aDouble, "How!?")
+        aDouble = 7.2
+        XCTAssert(aNum != aDouble, "How!?")
     }
     
     func testCopy() {
