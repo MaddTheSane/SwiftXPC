@@ -43,7 +43,7 @@ extern xpc_object_t XPCShimGetTerminationImminentError(void);
 
 #pragma mark xpc_shmem
 
-extern unsigned char *__nullable XPCShimMapSharedMemoryRegion(xpc_object_t region, size_t *size);
+extern unsigned char *__nullable XPCShimMapSharedMemoryRegion(xpc_object_t region, size_t *__nullable size);
 
 #pragma mark xpc_main()
 

@@ -70,8 +70,7 @@ public final class XPCConnection : XPCObject {
     // MARK: Properties
     
     public var name: String? {
-        let ptr = xpc_connection_get_name(objectPointer)
-        if let ptr = ptr {
+        if let ptr = xpc_connection_get_name(objectPointer) {
             return String(cString: ptr)
         } else {
             return nil

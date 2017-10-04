@@ -23,13 +23,13 @@ public final class XPCData : XPCObject {
         return xpc_data_get_length(objectPointer)
     }
     
-    public func readData(_ offset: Int = 0) -> Data? {
-        guard let data = NSMutableData(length: self.length) else {
-            return nil
+    public func readData(fromOffset offset: Int = 0) -> Data? {
+        var data = Data(count: self.length)
+        let aCopied = data.withUnsafeMutableBytes { (ptr: UnsafeMutablePointer<UInt8>) -> Int in
+            return xpc_data_get_bytes(objectPointer, ptr, offset, self.length)
         }
-        let aCopied = xpc_data_get_bytes(objectPointer, data.mutableBytes, offset, self.length)
-        data.length = aCopied
-        return (NSData(data: data as Data) as Data)
+        data.count = aCopied
+        return data
     }
     
     override public var description: String {
