@@ -10,7 +10,7 @@ import Foundation
 import XPC
 
 public final class XPCService {
-    @noreturn public class func run(_ handler: (XPCConnection) -> ()) {
+    public class func run(_ handler: @escaping (XPCConnection) -> ()) -> Never  {
         XPCShimMain {
             ptr in
             handler(XPCConnection(nativePointer: ptr))

@@ -31,7 +31,7 @@ public final class XPCConnection : XPCObject {
         xpc_connection_set_target_queue(objectPointer, queue)
     }
     
-    public func set(handler block: (XPCObject) -> ()) {
+    public func set(handler block: @escaping (XPCObject) -> ()) {
         xpc_connection_set_event_handler(objectPointer) {
             ptr in
             block(nativeTypeForXPCObject(ptr))
@@ -50,14 +50,14 @@ public final class XPCConnection : XPCObject {
         xpc_connection_send_message(objectPointer, message.objectPointer)
     }
     
-    public func send(message: XPCDictionary, replyHandler: (XPCObject) -> ()) {
+    public func send(message: XPCDictionary, replyHandler: @escaping (XPCObject) -> ()) {
         xpc_connection_send_message_with_reply(objectPointer, message.objectPointer, nil) {
             obj in
             replyHandler(nativeTypeForXPCObject(obj))
         }
     }
     
-    public func send(barrier: () -> ()) {
+    public func send(barrier: @escaping () -> ()) {
         xpc_connection_send_barrier(objectPointer) {
             barrier()
         }

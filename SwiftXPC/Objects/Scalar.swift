@@ -69,7 +69,7 @@ public func <(lhs: XPCDouble, rhs: XPCDouble) -> Bool {
     return lhs.value < rhs.value
 }
 
-public final class XPCNull : XPCObject, NilLiteralConvertible {
+public final class XPCNull : XPCObject, ExpressibleByNilLiteral {
     public convenience init() {
         self.init(nativePointer: xpc_null_create())
     }
@@ -79,7 +79,7 @@ public final class XPCNull : XPCObject, NilLiteralConvertible {
     }
 }
 
-public final class XPCBool : XPCObject, BooleanLiteralConvertible, Boolean {
+public final class XPCBool : XPCObject, ExpressibleByBooleanLiteral {
     public convenience init(value: Bool) {
         self.init(nativePointer: xpc_bool_create(value))
     }
@@ -101,7 +101,7 @@ public final class XPCBool : XPCObject, BooleanLiteralConvertible, Boolean {
     }
 }
 
-public final class XPCInt : XPCObject, IntegerLiteralConvertible, Comparable {
+public final class XPCInt : XPCObject, ExpressibleByIntegerLiteral, Comparable {
     public convenience init(value: Int) {
         self.init(nativePointer: xpc_int64_create(Int64(value)))
     }
@@ -123,7 +123,7 @@ public final class XPCInt : XPCObject, IntegerLiteralConvertible, Comparable {
     }
 }
 
-public final class XPCUInt : XPCObject, IntegerLiteralConvertible, Comparable {
+public final class XPCUInt : XPCObject, ExpressibleByIntegerLiteral, Comparable {
     public convenience init(value: UInt) {
         self.init(nativePointer: xpc_uint64_create(UInt64(value)))
     }
@@ -149,7 +149,7 @@ public final class XPCUInt : XPCObject, IntegerLiteralConvertible, Comparable {
     }
 }
 
-public final class XPCDouble : XPCObject, IntegerLiteralConvertible, FloatLiteralConvertible, Comparable {
+public final class XPCDouble : XPCObject, ExpressibleByIntegerLiteral, ExpressibleByFloatLiteral, Comparable {
     public convenience init(value: Double) {
         self.init(nativePointer: xpc_double_create(value))
     }

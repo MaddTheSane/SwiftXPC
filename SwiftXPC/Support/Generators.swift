@@ -13,7 +13,7 @@ public struct XPCArrayIterator: IteratorProtocol {
     private let theArray: XPCArray
     private var status: Int
     
-    private init(array: XPCArray) {
+    fileprivate init(array: XPCArray) {
         status = 0
         if let copiedArray = array.copy() as? XPCArray {
             theArray = copiedArray
@@ -40,7 +40,7 @@ extension XPCArray: Sequence {
     }
 }
 
-extension XPCArray: ArrayLiteralConvertible {
+extension XPCArray: ExpressibleByArrayLiteral {
     public typealias Element = XPCObject
 
     public convenience init(arrayLiteral elements: Element...) {
@@ -80,7 +80,7 @@ public struct XPCDictIterator: IteratorProtocol {
     }
 }
 
-extension XPCDictionary: DictionaryLiteralConvertible, Sequence {
+extension XPCDictionary: ExpressibleByDictionaryLiteral, Sequence {
     public typealias Key = String
     public typealias Value = XPCObject
     public typealias Iterator = XPCDictIterator

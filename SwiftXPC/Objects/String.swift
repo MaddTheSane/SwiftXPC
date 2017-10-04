@@ -9,7 +9,7 @@
 import Foundation
 import XPC
 
-public final class XPCString : XPCObject, StringLiteralConvertible {
+public final class XPCString : XPCObject, ExpressibleByStringLiteral {
     public convenience init(string contents: String, encoding: String.Encoding) {
         let byteCount = contents.lengthOfBytes(using: encoding) + 1
         var buffer = [CChar](repeating: CChar(0), count: byteCount)

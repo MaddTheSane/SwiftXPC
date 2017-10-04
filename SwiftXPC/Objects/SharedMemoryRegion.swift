@@ -29,13 +29,14 @@ public final class XPCSharedMemoryRegion : XPCObject {
     public func readMemory() -> SharedMemoryPointer? {
         var size : Int = 0
         
-        let mem : UnsafeMutablePointer<UInt8>? = withUnsafeMutablePointer(&size, {
+        guard let mem : UnsafeMutablePointer<UInt8> = withUnsafeMutablePointer(to: &size, {
             address in
             return XPCShimMapSharedMemoryRegion(self.objectPointer, address)
-        })
-        guard mem != nil else { return nil }
+        }) else {
+            return nil
+        }
         
-        return SharedMemoryPointer(buffer: mem!, length: Int(size))
+        return SharedMemoryPointer(buffer: mem, length: Int(size))
     }
 }
 

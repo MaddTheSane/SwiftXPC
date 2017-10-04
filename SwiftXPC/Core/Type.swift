@@ -83,8 +83,8 @@ public final class XPCObjectType : Equatable {
     public static let error: XPCObjectType = {
         return XPCObjectType(nativePointer: XPCShimGetErrorType())
     }()
-}
-
-public func ==(lhs: XPCObjectType, rhs: XPCObjectType) -> Bool {
-    return lhs.objectPointer == rhs.objectPointer
+    
+    public class func ==(lhs: XPCObjectType, rhs: XPCObjectType) -> Bool {
+        return lhs.objectPointer == rhs.objectPointer
+    }
 }

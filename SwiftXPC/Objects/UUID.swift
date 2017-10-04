@@ -37,7 +37,7 @@ public final class XPCUUID : XPCObject {
     }
     
     public var UUID: Foundation.UUID {
-        let ourBytes = xpc_uuid_get_bytes(objectPointer)
+        let ourBytes = xpc_uuid_get_bytes(objectPointer)!
         return (Foundation.NSUUID(uuidBytes: ourBytes) as Foundation.UUID)
     }
     
